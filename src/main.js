@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from "vue";
 import {
   Form,
   Input,
@@ -6,11 +6,17 @@ import {
   Button,
   Checkbox,
   Radio,
-} from 'ant-design-vue';
-import App from './App.vue';
-import router from './router';
-import store from './store';
-import 'ant-design-vue/dist/antd.css';
+  DatePicker,
+  LocaleProvider,
+  Select,
+  InputNumber,
+  Row,
+  Col
+} from "ant-design-vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+import "ant-design-vue/dist/antd.css";
 
 Vue.config.productionTip = false;
 Vue.use(Form);
@@ -19,9 +25,15 @@ Vue.use(Icon);
 Vue.use(Button);
 Vue.use(Checkbox);
 Vue.use(Radio);
+Vue.use(DatePicker);
+Vue.use(LocaleProvider);
+Vue.use(Select);
+Vue.use(InputNumber);
+Vue.use(Row);
+Vue.use(Col);
 
 new Vue({
   router,
   store,
-  render: h => h(App),
-}).$mount('#app');
+  render: h => h(App)
+}).$mount("#app");

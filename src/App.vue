@@ -1,12 +1,28 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+  <a-locale-provider :locale="zh_CN">
+    <div id="app">
+      <router-view />
+    </div>
+  </a-locale-provider>
 </template>
+<script>
+import zh_CN from "ant-design-vue/lib/locale-provider/zh_CN";
+import moment from "moment";
+import "moment/locale/zh-cn";
+
+moment.locale("zh-cn");
+export default {
+  data() {
+    return {
+      zh_CN
+    };
+  }
+};
+</script>
 
 <style lang="less">
 #app {
-  font-family: 'Microsoft Yahei', Helvetica, Arial, sans-serif;
+  font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -188,7 +204,8 @@ textarea {
  */
 
 button,
-input { /* 1 */
+input {
+  /* 1 */
   overflow: visible;
 }
 
@@ -198,7 +215,8 @@ input { /* 1 */
  */
 
 button,
-select { /* 1 */
+select {
+  /* 1 */
   text-transform: none;
 }
 

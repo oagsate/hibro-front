@@ -2,15 +2,13 @@
   <div class="login">
     <div class="form">
       <div class="title">hi, bro!</div>
-      <a-form
-        class="login-form"
-      >
+      <a-form class="login-form">
         <a-form-item>
           <a-input
             v-decorator="[
-          'userName',
-          { rules: [{ required: true, message: 'Please input your username!' }] }
-        ]"
+              'userName',
+              { rules: [{ required: true, message: 'Please input your username!' }] }
+            ]"
             placeholder="用户名"
           >
             <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)" />
@@ -19,9 +17,9 @@
         <a-form-item>
           <a-input
             v-decorator="[
-          'password',
-          { rules: [{ required: true, message: 'Please input your Password!' }] }
-        ]"
+              'password',
+              { rules: [{ required: true, message: 'Please input your Password!' }] }
+            ]"
             type="password"
             placeholder="密码"
           >
@@ -31,16 +29,18 @@
         <a-form-item>
           <a-checkbox
             v-decorator="[
-          'remember',
-          {
-            valuePropName: 'checked',
-            initialValue: true,
-          }
-        ]"
-          >记住密码</a-checkbox>
+              'remember',
+              {
+                valuePropName: 'checked',
+                initialValue: true
+              }
+            ]"
+            >记住密码</a-checkbox
+          >
           <a class="login-form-forgot" href>忘记密码</a>
-          <a-button type="primary" html-type="submit" class="login-form-button">登录</a-button>没有账号？
-          <router-link :to="{name:'register'}">马上注册！</router-link>
+          <a-button type="primary" html-type="submit" class="login-form-button">登录</a-button
+          >没有账号？
+          <router-link :to="{ name: 'register' }">马上注册！</router-link>
         </a-form-item>
       </a-form>
     </div>
@@ -65,7 +65,7 @@ export default {};
   bottom: 0;
 }
 
-.title{
+.title {
   text-align: center;
   font-size: 40px;
   font-weight: bold;
