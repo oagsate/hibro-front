@@ -2,10 +2,16 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
+import Hibro from "@/views/Hibro.vue";
+import Square from "@/views/Square.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: "/",
+    redirect: "login"
+  },
   {
     path: "/login",
     name: "login",
@@ -17,13 +23,26 @@ const routes = [
     component: Register
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ "../views/About.vue")
+    path: "/hibro",
+    name: "hibro",
+    component: Hibro,
+    children: [
+      {
+        path: "/square",
+        name: "square",
+        component: Square
+      }
+    ]
   }
+
+  // {
+  //   path: "/about",
+  //   name: "about",
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ "../views/About.vue")
+  // }
 ];
 
 const router = new VueRouter({

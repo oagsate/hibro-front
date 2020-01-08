@@ -11,7 +11,9 @@ import {
   Select,
   InputNumber,
   Row,
-  Col
+  Col,
+  Layout,
+  Menu
 } from "ant-design-vue";
 import App from "./App.vue";
 import router from "./router";
@@ -32,6 +34,8 @@ Vue.use(Select);
 Vue.use(InputNumber);
 Vue.use(Row);
 Vue.use(Col);
+Vue.use(Layout);
+Vue.use(Menu);
 
 Vue.prototype.$http = http;
 
