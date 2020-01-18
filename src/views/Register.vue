@@ -65,9 +65,12 @@ export default {
     handleSubmit() {
       this.form.validateFields((err, values) => {
         if (!err) {
-          this.$http.post("/user", values).then(res => {
+          this.$http.post("/register", values).then(res => {
             if (res.state) {
               this.$message.success("注册成功！");
+              this.$router.push({ name: "square" });
+            } else {
+              this.$message.error(res.errmsg);
             }
           });
         }

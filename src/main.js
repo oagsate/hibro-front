@@ -13,7 +13,8 @@ import {
   Row,
   Col,
   Layout,
-  Menu
+  Menu,
+  message
 } from "ant-design-vue";
 import App from "./App.vue";
 import router from "./router";
@@ -38,6 +39,7 @@ Vue.use(Layout);
 Vue.use(Menu);
 
 Vue.prototype.$http = http;
+Vue.prototype.$message = message;
 
 new Vue({
   router,

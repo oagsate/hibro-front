@@ -9,7 +9,7 @@
               'userName',
               { rules: [{ required: true, message: 'Please input your username!' }] }
             ]"
-            placeholder="用户名/邮箱"
+            placeholder="用户名"
           >
             <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)" />
           </a-input>
