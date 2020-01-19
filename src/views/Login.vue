@@ -2,13 +2,10 @@
   <div class="login">
     <div class="form">
       <div class="title">hi, bro!</div>
-      <a-form class="login-form">
+      <a-form class="login-form" :form="form" @submit="handleSubmit">
         <a-form-item>
           <a-input
-            v-decorator="[
-              'userName',
-              { rules: [{ required: true, message: 'Please input your username!' }] }
-            ]"
+            v-decorator="['name', { rules: [{ required: true, message: '请输入用户名' }] }]"
             placeholder="用户名"
           >
             <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)" />
@@ -16,10 +13,7 @@
         </a-form-item>
         <a-form-item>
           <a-input-password
-            v-decorator="[
-              'password',
-              { rules: [{ required: true, message: 'Please input your Password!' }] }
-            ]"
+            v-decorator="['password', { rules: [{ required: true, message: '请输入密码' }] }]"
             placeholder="密码"
           >
             <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)" />
@@ -47,7 +41,28 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      form: this.$form.createForm(this)
+    };
+  },
+  methods: {
+    handleSubmit(e) {
+      e.preventDefault();
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          this.$http.post("/login", values).then(res => {
+            if (res) {
+              this.$message.success("登录成功");
+              this.$router.push({ name: "square" });
+            }
+          });
+        }
+      });
+    }
+  }
+};
 </script>
 <style lang="less" scoped>
 .login {

@@ -1,14 +1,29 @@
 <template>
   <a-layout class="layout">
     <a-layout-header>
-      <div class="logo">hi, bro!</div>
-      <a-menu theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
-        <a-menu-item key="1">广场</a-menu-item>
-        <a-menu-item key="2">主页</a-menu-item>
-      </a-menu>
+      <div style="width:100%;max-width:1100px;margin-left:auto;margin-right:auto;">
+        <div class="logo">hi, bro!</div>
+        <a-menu
+          theme="dark"
+          mode="horizontal"
+          :selectedKeys="current"
+          :style="{ lineHeight: '64px' }"
+        >
+          <a-menu-item key="square"
+            ><router-link :to="{ name: 'square' }">广场</router-link></a-menu-item
+          >
+          <a-menu-item key="myHome"
+            ><router-link :to="{ name: 'myHome' }">我的主页</router-link></a-menu-item
+          >
+        </a-menu>
+      </div>
     </a-layout-header>
-    <a-layout-content style="padding: 0 50px;margin-top:50px;">
-      <div :style="{ background: '#fff', padding: '24px', height: '100%' }">Content</div>
+    <a-layout-content
+      style="margin-top:50px;width:100%;max-width:1100px;margin-left:auto;margin-right:auto;"
+    >
+      <div :style="{ background: '#fff', padding: '24px', height: '100%' }">
+        <router-view />
+      </div>
     </a-layout-content>
     <a-layout-footer style="text-align: center">
       Created By oagsate
@@ -16,7 +31,26 @@
   </a-layout>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      current: undefined
+    };
+  },
+  watch: {
+    $route() {
+      this.setCurrent();
+    }
+  },
+  mounted() {
+    this.setCurrent();
+  },
+  methods: {
+    setCurrent() {
+      this.current = [this.$route.name];
+    }
+  }
+};
 </script>
 <style lang="less" scoped>
 .layout {

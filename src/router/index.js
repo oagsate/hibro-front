@@ -4,6 +4,7 @@ import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import Hibro from "@/views/Hibro.vue";
 import Square from "@/views/Square.vue";
+import MyHome from "@/views/MyHome.vue";
 
 Vue.use(VueRouter);
 
@@ -28,9 +29,14 @@ const routes = [
     component: Hibro,
     children: [
       {
-        path: "/square",
+        path: "square",
         name: "square",
         component: Square
+      },
+      {
+        path: "my-home",
+        name: "myHome",
+        component: MyHome
       }
     ]
   }

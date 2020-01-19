@@ -41,7 +41,7 @@ Vue.use(Menu);
 Vue.prototype.$http = http;
 Vue.prototype.$message = message;
 
-new Vue({
+export default new Vue({
   router,
   store,
   render: h => h(App)
