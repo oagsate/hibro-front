@@ -15,16 +15,15 @@
           </a-input>
         </a-form-item>
         <a-form-item>
-          <a-input
+          <a-input-password
             v-decorator="[
               'password',
               { rules: [{ required: true, message: 'Please input your Password!' }] }
             ]"
-            type="password"
             placeholder="密码"
           >
             <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)" />
-          </a-input>
+          </a-input-password>
         </a-form-item>
         <a-form-item>
           <a-checkbox
