@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="basic-info">
-      <img src="a.jpeg" alt="" />
+      <img src="a.jpg" alt="" />
       <div class="info-item" v-for="item in infoCfg" :key="item.index">
         <div>{{ item.word }}：</div>
         <div>{{ getInfoText(item) }}</div>
@@ -35,6 +35,48 @@ const infoCfg = [
     word: "最近登录",
     render: v => {
       return moment(v * 1000).format("YYYY-MM-DD HH:mm:ss");
+    }
+  },
+  {
+    index: "birthday",
+    word: "出生日期",
+    render: v => {
+      return moment(v * 1000).format("YYYY-MM-DD HH:mm:ss");
+    }
+  },
+  {
+    index: "status",
+    word: "情感状态",
+    render: v => {
+      return v;
+    }
+  },
+  {
+    index: "height",
+    word: "身高",
+    render: v => {
+      return v + " cm";
+    }
+  },
+  {
+    index: "weight",
+    word: "体重",
+    render: v => {
+      return v + " 斤";
+    }
+  },
+  {
+    index: "education",
+    word: "教育程度",
+    render: v => {
+      return v;
+    }
+  },
+  {
+    index: "location",
+    word: "所在地",
+    render: v => {
+      return v;
     }
   }
 ];
