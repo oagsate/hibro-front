@@ -1,6 +1,6 @@
 <template>
   <a-layout class="layout">
-    <a-layout-header>
+    <a-layout-header style="position:fixed;width:100%;z-index:1;">
       <div style="width:100%;max-width:1100px;margin-left:auto;margin-right:auto;">
         <div class="logo">hi, bro!</div>
         <a-menu
@@ -19,9 +19,9 @@
       </div>
     </a-layout-header>
     <a-layout-content
-      style="margin-top:50px;width:100%;max-width:1100px;margin-left:auto;margin-right:auto;"
+      style="margin-top:114px;width:100%;max-width:1100px;margin-left:auto;margin-right:auto;"
     >
-      <div :style="{ background: '#fff', padding: '24px', height: '100%' }">
+      <div :style="{ background: '#fff', padding: '24px' }">
         <router-view />
       </div>
     </a-layout-content>
@@ -54,7 +54,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .layout {
-  height: 100%;
+  min-height: 100%;
 }
 .logo {
   width: 120px;

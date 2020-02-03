@@ -27,6 +27,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
 }
+@color: #22b14c;
 </style>
 <style lang="less">
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */

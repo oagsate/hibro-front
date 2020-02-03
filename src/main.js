@@ -14,7 +14,8 @@ import {
   Col,
   Layout,
   Menu,
-  message
+  message,
+  Modal
 } from "ant-design-vue";
 import App from "./App.vue";
 import router from "./router";
@@ -37,6 +38,7 @@ Vue.use(Row);
 Vue.use(Col);
 Vue.use(Layout);
 Vue.use(Menu);
+Vue.use(Modal);
 
 Vue.prototype.$http = http;
 Vue.prototype.$message = message;

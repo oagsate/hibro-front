@@ -15,7 +15,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   function({ data }) {
     if (data.state) {
-      return data.data;
+      return data.data || {};
     } else {
       vm.$message.error(data.errmsg);
       if (data.errcode === 1) {
