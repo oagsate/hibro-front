@@ -15,7 +15,11 @@ import {
   Layout,
   Menu,
   message,
-  Modal
+  Modal,
+  Pagination,
+  Tabs,
+  Cascader,
+  Upload
 } from "ant-design-vue";
 import App from "./App.vue";
 import router from "./router";
@@ -39,9 +43,14 @@ Vue.use(Col);
 Vue.use(Layout);
 Vue.use(Menu);
 Vue.use(Modal);
+Vue.use(Pagination);
+Vue.use(Tabs);
+Vue.use(Cascader);
+Vue.use(Upload);
 
 Vue.prototype.$http = http;
 Vue.prototype.$message = message;
+Vue.prototype.$confirm = Modal.confirm;
 
 export default new Vue({
   router,
