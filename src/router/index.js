@@ -4,7 +4,7 @@ import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import Hibro from "@/views/Hibro.vue";
 import Square from "@/views/Square.vue";
-import MyHome from "@/views/MyHome.vue";
+import Home from "@/views/Home.vue";
 
 Vue.use(VueRouter);
 
@@ -34,9 +34,9 @@ const routes = [
         component: Square
       },
       {
-        path: "my-home",
-        name: "myHome",
-        component: MyHome
+        path: "home/:id",
+        name: "home",
+        component: Home
       }
     ]
   }

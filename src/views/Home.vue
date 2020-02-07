@@ -1,31 +1,47 @@
 <template>
   <div>
     <div class="basic-info">
-      <img :src="self.avatar ? staticHost + self.avatar : 'default.jpg'" alt="" />
+      <img :src="info.avatar ? staticHost + info.avatar : 'default.jpg'" alt="" />
       <div class="info-item" v-for="item in infoCfg" :key="item.index">
         <div>{{ item.word }}：</div>
         <div>{{ getInfoText(item) }}</div>
       </div>
       <div class="self-desc">
-        <div>{{ self.description }}</div>
+        <div>{{ self.description || "暂无简介" }}</div>
       </div>
     </div>
-    <div class="my-thought">
+    <div class="area">
       <div class="title-area">
-        <div class="title-word">我的想法</div>
-        <div class="title-button" @click="visible = true">
+        <div class="title-word">想法</div>
+        <div class="title-button" v-if="homeId === -1" @click="visible = true">
           <Button icon="plus">发表</Button>
         </div>
       </div>
-      <div class="thoughts">
-        <ThoughtList :thoughts="thoughts" @itemClick="handleThoughtDelete" :enableDelete="true" />
-        <a-pagination
-          style="float:right;margin-top:20px;"
-          v-model="current"
-          :total="total"
-          @change="fetchThought"
+      <div class="list-wrapper">
+        <ThoughtList
+          :thoughts="thoughts"
+          @itemClick="handleThoughtDelete"
+          :enableDelete="homeId === -1"
         />
+        <a-pagination style="float:right;margin-top:20px;" :total="total" @change="fetchThought" />
       </div>
+    </div>
+    <div class="area">
+      <div class="title-area">
+        <div class="title-word">照片</div>
+        <div class="title-button" v-if="homeId === -1" @click="visiblePic = true">
+          <Button icon="plus">发表</Button>
+        </div>
+      </div>
+      <div class="list-wrapper">
+        <PicList :pics="pics" />
+      </div>
+      <a-pagination
+        :pageSize="9"
+        style="float:right;margin-top:20px;"
+        :total="totalPic"
+        @change="fetchPic"
+      />
     </div>
     <a-modal
       v-model="visible"
@@ -37,12 +53,31 @@
     >
       <a-textarea :rows="6" v-model="thought" />
     </a-modal>
+    <a-modal
+      v-model="visiblePic"
+      title="发表照片"
+      @ok="createPic"
+      :closable="false"
+      :maskClosable="false"
+    >
+      <a-form>
+        <a-form-item label="标题" :labelCol="{ span: 3 }" :wrapperCol="{ span: 20 }">
+          <a-input v-model="picName" />
+        </a-form-item>
+        <a-form-item label="照片" :labelCol="{ span: 3 }" :wrapperCol="{ span: 20 }">
+          <a-upload :fileList="fileList" :beforeUpload="beforeUpload" :remove="handleRemove">
+            <a-button> <a-icon type="upload" />选择图片 </a-button>
+          </a-upload>
+        </a-form-item>
+      </a-form>
+    </a-modal>
   </div>
 </template>
 <script>
 import moment from "moment";
 import Button from "@/components/Button";
 import ThoughtList from "@/components/ThoughtList";
+import PicList from "@/components/PicList";
 import { mapState, mapGetters } from "vuex";
 import store from "@/store";
 const statusCfg = {
@@ -142,7 +177,8 @@ const infoCfg = [
 export default {
   components: {
     Button,
-    ThoughtList
+    ThoughtList,
+    PicList
   },
   data() {
     return {
@@ -150,20 +186,40 @@ export default {
       visible: false,
       thought: undefined,
       thoughts: [],
-      current: 1,
       total: 0,
-      staticHost: appGlobals.staticHost
+      pageSelf: {},
+      staticHost: appGlobals.staticHost,
+      homeId: undefined,
+      visiblePic: false,
+      picName: undefined,
+      fileList: [],
+      totalPic: 0,
+      pics: []
     };
   },
   computed: {
-    ...mapState(["self"])
+    ...mapState(["self"]),
+    info() {
+      if (this.homeId === -1) {
+        return this.self;
+      } else if (this.homeId === undefined) {
+        return {};
+      } else {
+        return this.pageSelf;
+      }
+    }
+  },
+  watch: {
+    $route() {
+      this.doAfterMounted();
+    }
   },
   mounted() {
-    this.fetchThought(1);
+    this.doAfterMounted();
   },
   methods: {
     getInfoText(item) {
-      const temp = this.self[item.index];
+      const temp = this.info[item.index];
       if (temp === undefined) {
         return "暂未填写";
       }
@@ -172,6 +228,14 @@ export default {
       } else {
         return temp;
       }
+    },
+    doAfterMounted() {
+      this.homeId = parseInt(this.$route.params.id);
+      if (this.homeId !== -1) {
+        this.fetchPageSelf();
+      }
+      this.fetchThought(1);
+      this.fetchPic(1);
     },
     createThought() {
       const thought = this.thought.trim();
@@ -191,14 +255,23 @@ export default {
       }
     },
     fetchThought(current) {
-      this.$http.get("/thought/-1", { params: { start: current, size: 10 } }).then(res => {
+      this.$http
+        .get(`/thought/${this.homeId}`, { params: { start: current, size: 10 } })
+        .then(res => {
+          if (res) {
+            this.thoughts = res.list;
+            this.total = res.total;
+          }
+        });
+    },
+    fetchPic(current) {
+      this.$http.get(`/picture/${this.homeId}`, { params: { current, pageSize: 9 } }).then(res => {
         if (res) {
-          this.thoughts = res.list;
-          this.total = res.total;
+          this.pics = res.list;
+          this.totalPic = res.total;
         }
       });
     },
-
     handleThoughtDelete(id) {
       this.$confirm({
         title: "确认操作",
@@ -210,6 +283,38 @@ export default {
               this.fetchThought(1);
             }
           });
+        }
+      });
+    },
+    fetchPageSelf() {
+      this.$http.get(`/user/${this.homeId}`).then(res => {
+        if (res) {
+          this.pageSelf = res;
+        }
+      });
+    },
+    beforeUpload(file) {
+      this.fileList = [file];
+      return false;
+    },
+    handleRemove() {
+      this.fileList = [];
+    },
+    createPic() {
+      if (!this.picName || !this.fileList.length) {
+        this.$message.warn("请完善表单");
+        return;
+      }
+      const formData = new FormData();
+      formData.set("file", this.fileList[0]);
+      formData.set("name", this.picName);
+      this.$http.post("/picture", formData).then(res => {
+        if (res) {
+          this.$message.success("上传成功");
+          this.visiblePic = false;
+          this.fileList = [];
+          this.picName = undefined;
+          this.fetchPic(1);
         }
       });
     }
@@ -248,12 +353,13 @@ export default {
   color: @text;
 }
 
-.my-thought {
+.area {
   margin-top: 50px;
+  overflow: hidden;
 }
 
 .title-area {
-  background-color: @background2;
+  background-color: @background3;
   height: 30px;
   line-height: 30px;
   padding-left: 20px;
@@ -274,7 +380,7 @@ export default {
   background-color: @background1;
 }
 
-.thoughts {
+.list-wrapper {
   overflow: hidden;
 }
 </style>

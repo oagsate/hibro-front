@@ -1,10 +1,15 @@
 <template>
   <div class="thought-list">
     <div class="thought-item" v-for="item in thoughts" :key="item.id">
-      <img class="thought-avatar" src="a.jpg" />
+      <img class="thought-avatar" :src="item.avatar ? staticHost + item.avatar : 'default.jpg'" />
       <div style="float:left;margin-left:10px;">
         <div>
-          <span class="thought-author">{{ item.name }}</span>
+          <router-link
+            class="thought-author"
+            target="_blank"
+            :to="{ name: 'home', params: { id: item.uid } }"
+            >{{ item.name }}</router-link
+          >
           <span style="padding-left:5px;padding-right:5px;">发表于</span>
           <span>{{ formatTime(item.createTime) }}</span>
         </div>
@@ -19,6 +24,7 @@
 <script>
 import moment from "moment";
 import Button from "@/components/Button";
+import { mapState } from "vuex";
 export default {
   components: {
     Button
@@ -34,6 +40,14 @@ export default {
       default: false,
       type: Boolean
     }
+  },
+  data() {
+    return {
+      staticHost: appGlobals.staticHost
+    };
+  },
+  computed: {
+    ...mapState(["self"])
   },
   methods: {
     formatTime(timestamp) {
@@ -59,7 +73,7 @@ export default {
   margin: 15px 0;
   overflow: hidden;
   &:hover {
-    background-color: @background2;
+    background-color: @background3;
   }
   .thought-avatar {
     width: 60px;
@@ -69,6 +83,7 @@ export default {
 
   .thought-author {
     color: @text;
+    font-weight: bold;
   }
 
   .thought-content {

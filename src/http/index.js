@@ -17,7 +17,7 @@ instance.interceptors.response.use(
     if (data.state) {
       return data.data || {};
     } else {
-      vm.$message.error(data.errmsg);
+      vm.$message.warn(data.errmsg);
       if (data.errcode === 1) {
         vm.$router.push({ name: "login" });
       }

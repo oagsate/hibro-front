@@ -9,16 +9,19 @@
           :selectedKeys="current"
           :style="{ lineHeight: '64px', float: 'left' }"
         >
-          <a-menu-item key="square"
-            ><router-link :to="{ name: 'square' }">广场</router-link></a-menu-item
-          >
-          <a-menu-item key="myHome"
-            ><router-link :to="{ name: 'myHome' }">我的主页</router-link></a-menu-item
-          >
+          <a-menu-item key="square">
+            <router-link :to="{ name: 'square' }">广场</router-link>
+          </a-menu-item>
+          <a-menu-item key="home">
+            <router-link :to="{ name: 'home', params: { id: -1 } }">我的主页</router-link>
+          </a-menu-item>
         </a-menu>
         <div class="head-right" @click="logout">注销</div>
         <div class="head-right" @click="prepareEditProfile">编辑资料</div>
         <div class="head-right" @click="visibleAvatar = true">上传头像</div>
+        <div class="head-right" style="margin-right:20px;font-weight:bold;color:#fff;">
+          欢迎你，{{ self.name }}
+        </div>
       </div>
     </a-layout-header>
     <a-layout-content
@@ -28,10 +31,8 @@
         <router-view />
       </div>
     </a-layout-content>
-    <a-layout-footer style="text-align: center">
-      Created By oagsate
-    </a-layout-footer>
-    <a-modal title="编辑资料" v-model="visibleProfile" :width="600" @ok="handleEditProfileSubmit">
+    <a-layout-footer style="text-align: center">Created By oagsate</a-layout-footer>
+    <a-modal title="编辑资料" v-model="visibleProfile" :width="700" @ok="handleEditProfileSubmit">
       <a-form :form="form">
         <a-row>
           <a-col :span="12">
@@ -50,6 +51,14 @@
                 :allowClear="false"
               ></a-date-picker>
             </a-form-item>
+            <a-form-item label="身高" :labelCol="{ span: 6 }" :wrapperCol="{ span: 16 }">
+              <a-input-number
+                :formatter="value => `${value}厘米`"
+                :parser="value => value.replace('厘米', '')"
+                style="width:100%;"
+                v-decorator="['height', { rules: [{ required: true, message: '请完善表单' }] }]"
+              ></a-input-number>
+            </a-form-item>
             <a-form-item label="情感状况" :labelCol="{ span: 6 }" :wrapperCol="{ span: 16 }">
               <a-select
                 v-decorator="['status', { rules: [{ required: true, message: '请完善表单' }] }]"
@@ -58,14 +67,6 @@
                 <a-select-option :value="1">恋爱中</a-select-option>
                 <a-select-option :value="2">已婚</a-select-option>
               </a-select>
-            </a-form-item>
-            <a-form-item label="身高" :labelCol="{ span: 6 }" :wrapperCol="{ span: 16 }">
-              <a-input-number
-                :formatter="value => `${value}厘米`"
-                :parser="value => value.replace('厘米', '')"
-                style="width:100%;"
-                v-decorator="['height', { rules: [{ required: true, message: '请完善表单' }] }]"
-              ></a-input-number>
             </a-form-item>
           </a-col>
           <a-col :span="12">
@@ -87,7 +88,7 @@
                 v-decorator="['location', { rules: [{ required: true, message: '请完善表单' }] }]"
               />
             </a-form-item>
-            <a-form-item label="取向" :labelCol="{ span: 6 }" :wrapperCol="{ span: 16 }">
+            <!-- <a-form-item label="取向" :labelCol="{ span: 6 }" :wrapperCol="{ span: 16 }">
               <a-select
                 v-decorator="[
                   'orientation',
@@ -99,7 +100,7 @@
                 <a-select-option :value="2">双性恋</a-select-option>
                 <a-select-option :value="3">其他</a-select-option>
               </a-select>
-            </a-form-item>
+            </a-form-item> -->
             <a-form-item label="体重" :labelCol="{ span: 6 }" :wrapperCol="{ span: 16 }">
               <a-input-number
                 :formatter="value => `${value}斤`"
@@ -117,7 +118,7 @@
     </a-modal>
     <a-modal title="上传头像" v-model="visibleAvatar" @ok="handleAvatarSubmit">
       <a-upload :fileList="fileList" :beforeUpload="beforeUpload" :remove="handleRemove">
-        <a-button> <a-icon type="upload" /> 选择图片 </a-button>
+        <a-button> <a-icon type="upload" />选择图片 </a-button>
       </a-upload>
     </a-modal>
   </a-layout>
@@ -152,7 +153,11 @@ export default {
   methods: {
     ...mapActions(["fetchSelf", "fetchArea"]),
     setCurrent() {
-      this.current = [this.$route.name];
+      if (this.$route.name === "home" && this.$route.params.id != -1) {
+        this.current = [];
+      } else {
+        this.current = [this.$route.name];
+      }
     },
     logout() {
       this.$confirm({
@@ -194,7 +199,7 @@ export default {
           weight,
           birthday,
           status,
-          orientation,
+          // orientation,
           description
         } = this.self;
         if (location) {
@@ -205,15 +210,18 @@ export default {
             location = [location];
           }
         }
+        if (birthday) {
+          birthday = moment(birthday * 1000);
+        }
         this.form.setFieldsValue({
           gender,
           location,
           education,
           height,
           weight,
-          birthday: moment(birthday * 1000),
+          birthday,
           status,
-          orientation,
+          // orientation,
           description
         });
       });
@@ -263,6 +271,22 @@ export default {
   margin-left: 8px;
   &:hover {
     color: #fff;
+  }
+}
+</style>
+<style lang="less">
+@import url("~@/common.less");
+#app {
+  .ant-layout-header {
+    background-color: @background0;
+  }
+  .ant-menu-dark.ant-menu-horizontal > .ant-menu-item,
+  .ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu {
+    background-color: @background0;
+  }
+  .ant-menu.ant-menu-dark .ant-menu-item-selected,
+  .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+    background-color: @background1;
   }
 }
 </style>
