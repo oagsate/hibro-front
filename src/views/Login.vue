@@ -31,7 +31,8 @@
             >记住密码</a-checkbox
           >
           <a class="login-form-forgot" href>忘记密码</a>
-          <a-button type="primary" html-type="submit" class="login-form-button">登录</a-button
+          <a-button :loading="loading" type="primary" html-type="submit" class="login-form-button"
+            >登录</a-button
           >没有账号？
           <router-link :to="{ name: 'register' }">马上注册！</router-link>
         </a-form-item>
@@ -44,7 +45,8 @@
 export default {
   data() {
     return {
-      form: this.$form.createForm(this)
+      form: this.$form.createForm(this),
+      loading: false
     };
   },
   methods: {
@@ -52,7 +54,9 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
+          this.loading = true;
           this.$http.post("/login", values).then(res => {
+            this.loading = false;
             if (res) {
               this.$message.success("登录成功");
               this.$router.push({ name: "square" });
