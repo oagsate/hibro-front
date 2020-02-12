@@ -23,7 +23,12 @@
           @itemClick="handleThoughtDelete"
           :enableDelete="homeId === -1"
         />
-        <a-pagination style="float:right;margin-top:20px;" :total="total" @change="fetchThought" />
+        <a-pagination
+          v-model="currentThought"
+          style="float:right;margin-top:20px;"
+          :total="total"
+          @change="fetchThought"
+        />
       </div>
     </div>
     <div class="area">
@@ -34,13 +39,14 @@
         </div>
       </div>
       <div class="list-wrapper">
-        <PicList :pics="pics" />
+        <PicList :pics="pics" :enablePanel="homeId === -1" @delete="handlePicDelete" />
       </div>
       <a-pagination
         :pageSize="9"
         style="float:right;margin-top:20px;"
         :total="totalPic"
         @change="fetchPic"
+        v-model="currentPic"
       />
     </div>
     <a-modal
@@ -194,7 +200,9 @@ export default {
       picName: undefined,
       fileList: [],
       totalPic: 0,
-      pics: []
+      pics: [],
+      currentThought: 1,
+      currentPic: 1
     };
   },
   computed: {
@@ -281,6 +289,22 @@ export default {
             if (res) {
               this.$message.success("删除成功");
               this.fetchThought(1);
+              this.currentThought = 1;
+            }
+          });
+        }
+      });
+    },
+    handlePicDelete(id) {
+      this.$confirm({
+        title: "确认操作",
+        content: "确定删除该项内容吗？",
+        onOk: () => {
+          this.$http.delete(`/picture/${id}`).then(res => {
+            if (res) {
+              this.$message.success("删除成功");
+              this.fetchPic(1);
+              this.currentPic = 1;
             }
           });
         }
