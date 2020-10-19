@@ -90,7 +90,7 @@ export default {};
 </script>
 <style lang="less" scoped>
 .login {
-  overflow: hidden;
+  overflow: auto;
 }
 .form {
   width: 800px;
