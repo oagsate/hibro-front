@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './routes/login/login.component';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 registerLocaleData(zh);
 
@@ -27,7 +28,8 @@ registerLocaleData(zh);
     BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    NzInputModule
+    NzInputModule,
+    NzButtonModule
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]
