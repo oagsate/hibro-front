@@ -11,13 +11,16 @@ export class LoginComponent{
     password = '';
 
     constructor(
-        private userSvc:UserService
+        private userSvc:UserService,
     ){}
 
     onLogin(){
         this.userSvc.login({
             name:this.username,
             password:this.password
-        }).subscribe((res=>{}))
+        }).subscribe((res=>{
+            if(res.code!==0){
+            }
+        }))
     }
 }
