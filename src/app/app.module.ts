@@ -11,15 +11,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './routes/login/login.component';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzButtonModule } from 'ng-zorro-antd/button';
+import { SharedModule } from './shared/shared.module';
+import { RegisterComponent } from './routes/register/register.component';
+
 
 registerLocaleData(zh);
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -28,8 +30,7 @@ registerLocaleData(zh);
     BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    NzInputModule,
-    NzButtonModule
+    SharedModule
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]

@@ -3,13 +3,18 @@
 // For more information: https://ng.ant.design/docs/customize-theme/en
 // 引入官方提供的阿里云 less 样式文件
 @import "../node_modules/ng-zorro-antd/ng-zorro-antd.aliyun.less";
+@import "./variables.less";
 
 // Override less variables to here
 // View all variables: https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/components/style/themes/default.less
 
-@primary-color: #005c23;
+@primary-color: @theme;
 /* You can add global styles to this file, and also import other style files */
 
 .mt12{
     margin-top: 12px;
+}
+
+.w100p{
+    width: 100%;
 }

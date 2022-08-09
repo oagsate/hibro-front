@@ -1,4 +1,6 @@
 import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { NzMessageService } from "ng-zorro-antd/message";
 import { UserService } from "src/app/services/user.service";
 
 @Component({
@@ -12,6 +14,8 @@ export class LoginComponent{
 
     constructor(
         private userSvc:UserService,
+        private msgSvc:NzMessageService,
+        private router:Router
     ){}
 
     onLogin(){
@@ -20,7 +24,14 @@ export class LoginComponent{
             password:this.password
         }).subscribe((res=>{
             if(res.code!==0){
+                this.msgSvc.error(res.desc);
+            }else{
+                this.router.navigateByUrl('plaza');
             }
         }))
+    }
+
+    onRegister(){
+        this.router.navigateByUrl('register');
     }
 }
