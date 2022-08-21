@@ -7,12 +7,14 @@ import { zh_CN } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './routes/login/login.component';
 import { SharedModule } from './shared/shared.module';
 import { RegisterComponent } from './routes/register/register.component';
+import { ResponseInterceptor } from './http-interceptors/response-interceptor';
+import { MainLayoutComponent } from './routes/main-layout/main-layout.component';
 
 
 registerLocaleData(zh);
@@ -20,6 +22,7 @@ registerLocaleData(zh);
 @NgModule({
   declarations: [
     AppComponent,
+    MainLayoutComponent,
     LoginComponent,
     RegisterComponent
   ],
@@ -32,7 +35,7 @@ registerLocaleData(zh);
     ReactiveFormsModule,
     SharedModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN }, { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

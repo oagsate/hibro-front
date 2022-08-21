@@ -23,10 +23,8 @@ export class LoginComponent{
             name:this.username,
             password:this.password
         }).subscribe((res=>{
-            if(res.code!==0){
-                this.msgSvc.error(res.desc);
-            }else{
-                this.router.navigateByUrl('plaza');
+            if(res.code === 0){
+              this.router.navigateByUrl('plaza');
             }
         }))
     }
