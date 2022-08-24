@@ -13,8 +13,8 @@ export class MainLayoutComponent{
   logout(){
     this.userSvc.logout().subscribe(res=>{
       if(res.code===0){
-        this.router.navigateByUrl('login')
+        this.router.navigateByUrl('login');
       }
-    })
+    });
   }
 }

@@ -1,3 +1,4 @@
+@import url(/src/variables.less);
 .layout {
   min-height: 100vh;
 }
@@ -6,7 +7,7 @@
   height: 100%;
   color: #fff;
   margin: 0 24px 0 0;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: bold;
 }
 
@@ -14,6 +15,12 @@ nz-header {
   position: fixed;
   width: 100%;
   display: flex;
+  background-color: @theme;
+}
+
+.nav{
+  font-size: 16px;
+  font-weight: bold;
 }
 
 [nz-menu] {

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { UserService } from "src/app/services/user.service";
 
 @Component({
@@ -6,8 +6,8 @@ import { UserService } from "src/app/services/user.service";
   templateUrl:'./plaza.component.html',
   styleUrls:['./plaza.component.less']
 })
-export class PlazaComponent{
-  users :any[] = []
+export class PlazaComponent implements OnInit{
+  users :any[] = [];
 
   constructor(private userSvc:UserService){}
 
@@ -16,6 +16,6 @@ export class PlazaComponent{
       if(res.code===0){
         this.users = res.data;
       }
-    })
+    });
   }
 }

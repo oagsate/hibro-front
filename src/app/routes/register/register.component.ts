@@ -40,8 +40,8 @@ export class RegisterComponent{
 
     register(){
       this.userSvc.register(this.form.value).subscribe((res=>{
-          this.msgSvc.success('注册成功')
+          this.msgSvc.success('注册成功');
           this.router.navigateByUrl('plaza');
-    }))
+    }));
     }
 }
