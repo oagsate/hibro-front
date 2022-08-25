@@ -12,6 +12,12 @@ const routes: Routes = [
   },
   {
     path: 'plaza', component:MainLayoutComponent, loadChildren:() => import('./routes/plaza/plaza.module').then(m => m.PlazaModule)
+  },
+  {
+    path: 'notice', component:MainLayoutComponent, loadChildren:() => import('./routes/notice/notice.module').then(m => m.NoticeModule)
+  },
+  {
+    path: 'space', component:MainLayoutComponent, loadChildren:() => import('./routes/space/space.module').then(m => m.SpaceModule)
   }
 ];
 
