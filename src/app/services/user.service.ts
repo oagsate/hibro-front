@@ -19,10 +19,14 @@ export class UserService{
     }
 
     logout(){
-      return this.http.post<RO>('/api/logout',{})
+      return this.http.post<RO>('/api/logout',{});
     }
 
     getAll(){
-      return this.http.get<RO>('/api/users')
+      return this.http.get<RO>('/api/users');
+    }
+
+    getSelf(){
+      return this.http.get<RO>('/api/self');
     }
 }

@@ -1,7 +1,48 @@
 <div class="sec1">
   <img src="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png" alt="" class="photo">
-  <div class="info">
-    <div class="name">ttt</div>
-
+  <div class="info" *ngIf="user">
+    <div class="name">{{user.name}}</div>
+    <div class="user-info">
+      <div class="info-item">
+        <div class="info-title">上次登录：</div>
+        <div class="info-content">{{user.lastTime | date:'yyyy-MM-dd'}}</div>
+      </div>
+      <div class="info-item">
+        <div class="info-title">注册时间：</div>
+        <div class="info-content">{{user.createTime | date:'yyyy-MM-dd'}}</div>
+      </div>
+      <div class="info-item">
+        <div class="info-title">性别：</div>
+        <div class="info-content">{{user.gender}}</div>
+      </div>
+      <div class="info-item">
+        <div class="info-title">生日：</div>
+        <div class="info-content">{{user.birthday | date:'yyyy-MM-dd'}}</div>
+      </div>
+      <div class="info-item">
+        <div class="info-title">婚恋：</div>
+        <div class="info-content">{{user.status}}</div>
+      </div>
+      <div class="info-item">
+        <div class="info-title">教育程度：</div>
+        <div class="info-content">{{user.education}}</div>
+      </div>
+      <div class="info-item">
+        <div class="info-title">身高：</div>
+        <div class="info-content">{{user.height}}</div>
+      </div>
+      <div class="info-item">
+        <div class="info-title">体重：</div>
+        <div class="info-content">{{user.weight}}</div>
+      </div>
+      <div class="info-item">
+        <div class="info-title">所在地：</div>
+        <div class="info-content">{{user.location}}</div>
+      </div>
+      <div class="desc-item">
+        <div class="desc-title">个人简介：</div>
+        <div class="desc-content"></div>
+      </div>
+    </div>
   </div>
 </div>

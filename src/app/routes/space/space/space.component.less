@@ -6,6 +6,7 @@
 
 .sec1{
   display: flex;
+  background-color: #fff;
 }
 
 .photo{
@@ -13,8 +14,47 @@
   height: 200px;
 }
 
+.info{
+  flex-grow: 1;
+  padding: 8px 16px
+}
+
 .name{
   font-size: 20px;
   color: @theme;
   font-weight: bold;
+  border-bottom: 1px solid @theme-1-1;
+}
+
+.user-info{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  line-height: 28px;
+}
+
+.info-item{
+  width: 33.33%;
+  display: flex;
+}
+
+.info-title{
+  width: 30%;
+}
+
+.info-content{
+  width: 70%;
+}
+
+.desc-item{
+  width: 100%;
+  display: flex;
+}
+
+.desc-title{
+  width: 10%;
+}
+
+.desc-content{
+  width: 90%;
 }
