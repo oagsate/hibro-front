@@ -9,6 +9,9 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+
+import { LabelPipe } from "./pipes/label.pipe";
 
 
 @NgModule({
@@ -22,7 +25,11 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
         NzLayoutModule,
         NzMenuModule,
         NzDropDownModule,
-        NzIconModule
+        NzIconModule,
+        NzSpinModule
+    ],
+    declarations:[
+      LabelPipe
     ],
     exports:[
         NzMessageModule,
@@ -34,7 +41,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
         NzLayoutModule,
         NzMenuModule,
         NzDropDownModule,
-        NzIconModule
+        NzIconModule,
+        NzSpinModule,
+        LabelPipe
     ]
 })
 export class SharedModule{}

@@ -1,3 +1,10 @@
+export interface SelectOpt{
+  value:string|number;
+  label:string;
+  [key:string]:any;
+}
+
+
 export interface RO{
     code:number;
     desc:string;
@@ -19,5 +26,5 @@ export interface User {
 	location: number;
 	description?: any;
 	email?: any;
-	cstatus: number;
+	estatus: number;
 }

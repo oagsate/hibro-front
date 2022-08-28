@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { User } from "src/app/models/api.model";
+import { estatusOpts, genderOpts } from "src/app/datas/index.data";
+import { User } from "src/app/models/index.model";
+import { OptionService } from "src/app/services/option.service";
 import { UserService } from "src/app/services/user.service";
 
 @Component({
@@ -10,7 +12,9 @@ import { UserService } from "src/app/services/user.service";
 export class SpaceComponent implements OnInit{
   user?:User;
 
-  constructor(private userSvc:UserService){}
+
+
+  constructor(private userSvc:UserService,public optSvc:OptionService){}
 
   ngOnInit(){
     this.userSvc.getSelf().subscribe(res=>{

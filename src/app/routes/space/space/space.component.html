@@ -13,7 +13,7 @@
       </div>
       <div class="info-item">
         <div class="info-title">性别：</div>
-        <div class="info-content">{{user.gender}}</div>
+        <div class="info-content">{{user.gender |label:optSvc.genderOpts}}</div>
       </div>
       <div class="info-item">
         <div class="info-title">生日：</div>
@@ -21,19 +21,19 @@
       </div>
       <div class="info-item">
         <div class="info-title">婚恋：</div>
-        <div class="info-content">{{user.status}}</div>
+        <div class="info-content">{{user.status | label:optSvc.estatusOpts}}</div>
       </div>
       <div class="info-item">
         <div class="info-title">教育程度：</div>
-        <div class="info-content">{{user.education}}</div>
+        <div class="info-content">{{user.education | label:optSvc.educationOpts}}</div>
       </div>
       <div class="info-item">
         <div class="info-title">身高：</div>
-        <div class="info-content">{{user.height}}</div>
+        <div class="info-content">{{user.height}} cm</div>
       </div>
       <div class="info-item">
         <div class="info-title">体重：</div>
-        <div class="info-content">{{user.weight}}</div>
+        <div class="info-content">{{user.weight}} kg</div>
       </div>
       <div class="info-item">
         <div class="info-title">所在地：</div>
@@ -41,7 +41,7 @@
       </div>
       <div class="desc-item">
         <div class="desc-title">个人简介：</div>
-        <div class="desc-content"></div>
+        <div class="desc-content">{{user.description ?? '-'}}</div>
       </div>
     </div>
   </div>

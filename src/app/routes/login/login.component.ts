@@ -26,7 +26,7 @@ export class LoginComponent{
             if(res.code === 0){
               this.router.navigateByUrl('plaza');
             }
-        }))
+        }));
     }
 
     onRegister(){

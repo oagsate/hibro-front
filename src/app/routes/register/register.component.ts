@@ -44,4 +44,8 @@ export class RegisterComponent{
           this.router.navigateByUrl('plaza');
     }));
     }
+
+    onLoginClick(){
+      this.router.navigateByUrl('login');
+    }
 }
