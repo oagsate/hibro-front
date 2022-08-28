@@ -1,4 +1,4 @@
-<div class="sec1">
+<div class="sec sec1">
   <img src="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png" alt="" class="photo">
   <div class="info" *ngIf="user">
     <div class="name">{{user.name}}</div>
@@ -45,4 +45,13 @@
       </div>
     </div>
   </div>
+</div>
+<div class="sec sec2">
+  <nz-tabset [nzAnimated]="false" [nzTabBarExtraContent]="extraTemplate">
+    <nz-tab nzTitle="此刻">Content of Tab Pane 1</nz-tab>
+    <nz-tab nzTitle="文章">Content of Tab Pane 2</nz-tab>
+  </nz-tabset>
+  <ng-template #extraTemplate>
+    <a nz-button nzType="link"><span nz-icon nzType="plus" nzTheme="outline"></span>发表此刻</a>
+  </ng-template>
 </div>

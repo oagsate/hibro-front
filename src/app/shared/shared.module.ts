@@ -10,6 +10,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 import { LabelPipe } from "./pipes/label.pipe";
 
@@ -26,7 +27,8 @@ import { LabelPipe } from "./pipes/label.pipe";
         NzMenuModule,
         NzDropDownModule,
         NzIconModule,
-        NzSpinModule
+        NzSpinModule,
+        NzTabsModule
     ],
     declarations:[
       LabelPipe
@@ -43,6 +45,7 @@ import { LabelPipe } from "./pipes/label.pipe";
         NzDropDownModule,
         NzIconModule,
         NzSpinModule,
+        NzTabsModule,
         LabelPipe
     ]
 })
