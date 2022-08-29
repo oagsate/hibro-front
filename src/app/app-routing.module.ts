@@ -18,6 +18,9 @@ const routes: Routes = [
   },
   {
     path: 'space', component:MainLayoutComponent, loadChildren:() => import('./routes/space/space.module').then(m => m.SpaceModule)
+  },
+  {
+    path: 'thought', component:MainLayoutComponent, loadChildren:() => import('./routes/thought/thought.module').then(m => m.ThoughtModule)
   }
 ];
 
