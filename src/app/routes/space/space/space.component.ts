@@ -25,4 +25,8 @@ export class SpaceComponent implements OnInit{
       this.thoughts = res.data;
     });
   }
+
+  onDelete(){
+
+  }
 }

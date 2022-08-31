@@ -67,3 +67,41 @@
 .desc-content{
   width: 90%;
 }
+
+.thought-wrapper{
+  display: flex;
+  padding: 8px;
+  border-bottom: 1px dashed @theme-1-1;
+  position: relative;
+
+  &:last-child{
+    margin-bottom: initial;
+    border-bottom: initial;
+  }
+  &:hover{
+    background-color: @theme-1-05;
+    .thought-btns{
+      display: flex;
+    }
+  }
+}
+
+.thought-content{
+  padding-right: 16px;
+}
+
+.thought-time{
+  color:@gray;
+}
+
+.thought-btns{
+  position:absolute;
+  right: 8px;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 30px;
+  align-items: center;
+  display: none;
+}

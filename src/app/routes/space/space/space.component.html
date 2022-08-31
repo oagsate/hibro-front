@@ -50,7 +50,16 @@
   <nz-tabset [nzAnimated]="false" [nzTabBarExtraContent]="extraTemplate">
     <nz-tab nzTitle="此刻">
       <div class="tab-wrapper">
-        <div *ngFor="let item of thoughts">{{item.content}}</div>
+        <div *ngFor="let item of thoughts" class="thought-wrapper">
+          <img class="avatar-s mr16" src="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png" alt="">
+          <div>
+            <span class="thought-content">{{item.content}}</span>
+            <span class="thought-time">{{item.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+          </div>
+          <div class="thought-btns">
+            <button nz-button nzDanger nzType="default" nzSize="small">删除</button>
+          </div>
+        </div>
       </div>
     </nz-tab>
     <nz-tab nzTitle="文章">Content of Tab Pane 2</nz-tab>

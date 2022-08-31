@@ -11,6 +11,7 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 import { LabelPipe } from "./pipes/label.pipe";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -31,7 +32,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
       NzDropDownModule,
       NzIconModule,
       NzSpinModule,
-      NzTabsModule
+      NzTabsModule,
+      NzPopconfirmModule
     ],
     declarations:[
       LabelPipe
@@ -51,6 +53,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
         NzIconModule,
         NzSpinModule,
         NzTabsModule,
+        NzPopconfirmModule,
         LabelPipe
     ]
 })
