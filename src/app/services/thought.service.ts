@@ -17,4 +17,8 @@ export class ThoughtService{
     create(param:any){
       return this.http.post<RO>('/api/thought',param);
     }
+
+    delete(id:number){
+      return this.http.delete<RO>('/api/thought',{params:{id}});
+    }
 }

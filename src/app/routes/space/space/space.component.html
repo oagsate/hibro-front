@@ -57,7 +57,7 @@
             <span class="thought-time">{{item.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
           </div>
           <div class="thought-btns">
-            <button nz-button nzDanger nzType="default" nzSize="small">删除</button>
+            <button nz-button nzDanger nzType="default" nzSize="small" *ngIf="item.uid === user?.id" (click)="onDeleteClick(item.id)">删除</button>
           </div>
         </div>
       </div>

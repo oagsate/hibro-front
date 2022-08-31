@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { NzMessageService } from "ng-zorro-antd/message";
 import { estatusOpts, genderOpts } from "src/app/datas/index.data";
 import { User } from "src/app/models/index.model";
 import { OptionService } from "src/app/services/option.service";
@@ -15,18 +16,27 @@ export class SpaceComponent implements OnInit{
   thoughts:any = [];
 
 
-  constructor(private userSvc:UserService,public optSvc:OptionService,private thoughtSvc:ThoughtService){}
+  constructor(private userSvc:UserService,public optSvc:OptionService,private thoughtSvc:ThoughtService,private msgSvc:NzMessageService){}
 
   ngOnInit(){
     this.userSvc.getSelf().subscribe(res=>{
       this.user=res.data;
     });
+    this.fetchThought();
+  }
+
+  fetchThought(){
     this.thoughtSvc.getAll().subscribe(res=>{
       this.thoughts = res.data;
     });
   }
 
-  onDelete(){
-
+  onDeleteClick(id:number){
+    this.thoughtSvc.delete(id).subscribe(res=>{
+      if(res.code === 0){
+        this.msgSvc.success('操作成功');
+        this.fetchThought();
+      }
+    });
   }
 }
