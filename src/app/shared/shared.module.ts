@@ -13,27 +13,32 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 import { LabelPipe } from "./pipes/label.pipe";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 
 @NgModule({
     imports:[
-        NzMessageModule,
-        NzInputModule,
-        NzButtonModule,
-        NzFormModule,
-        NzInputNumberModule,
-        NzDatePickerModule,
-        NzLayoutModule,
-        NzMenuModule,
-        NzDropDownModule,
-        NzIconModule,
-        NzSpinModule,
-        NzTabsModule
+      FormsModule,
+      ReactiveFormsModule,
+      NzMessageModule,
+      NzInputModule,
+      NzButtonModule,
+      NzFormModule,
+      NzInputNumberModule,
+      NzDatePickerModule,
+      NzLayoutModule,
+      NzMenuModule,
+      NzDropDownModule,
+      NzIconModule,
+      NzSpinModule,
+      NzTabsModule
     ],
     declarations:[
       LabelPipe
     ],
     exports:[
+      FormsModule,
+      ReactiveFormsModule,
         NzMessageModule,
         NzInputModule,
         NzButtonModule,

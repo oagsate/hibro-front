@@ -3,6 +3,7 @@
     nz-input
     placeholder="请写下此刻的想法"
     [rows]="5"
+    [(ngModel)]="content"
   ></textarea>
   <div class="btn">
     <button nz-button nzType="primary" (click)="onSubmit()">提交</button>

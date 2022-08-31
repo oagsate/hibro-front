@@ -48,7 +48,11 @@
 </div>
 <div class="sec sec2">
   <nz-tabset [nzAnimated]="false" [nzTabBarExtraContent]="extraTemplate">
-    <nz-tab nzTitle="此刻">Content of Tab Pane 1</nz-tab>
+    <nz-tab nzTitle="此刻">
+      <div class="tab-wrapper">
+        <div *ngFor="let item of thoughts">{{item.content}}</div>
+      </div>
+    </nz-tab>
     <nz-tab nzTitle="文章">Content of Tab Pane 2</nz-tab>
   </nz-tabset>
   <ng-template #extraTemplate>
