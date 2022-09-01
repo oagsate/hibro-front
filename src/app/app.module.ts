@@ -15,7 +15,6 @@ import { RegisterComponent } from './routes/register/register.component';
 import { AppInterceptor } from './response-interceptor';
 import { MainLayoutComponent } from './routes/main-layout/main-layout.component';
 
-
 registerLocaleData(zh);
 
 @NgModule({

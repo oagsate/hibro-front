@@ -7,12 +7,18 @@ import { filter, map, Observable, tap } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Router } from '@angular/router';
 import { UiService } from './services/ui.service';
+import { StorageService } from './services/storage.service';
 
 /** Pass untouched request through to the next request handler. */
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
 
-  constructor(private msgSvc:NzMessageService,private router: Router,private uiSvc:UiService){}
+  constructor(
+    private msgSvc:NzMessageService,
+    private router: Router,
+    private uiSvc:UiService,
+    private storageSvc:StorageService
+  ){}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
@@ -22,6 +28,7 @@ export class AppInterceptor implements HttpInterceptor {
           if(event.status === HttpStatusCode.Ok){
             if(event.body.code ===1){
               this.msgSvc.warning("尚未登录或登录已过期");
+              this.storageSvc.removeItem("user");
               this.router.navigateByUrl('login');
             }else if(event.body.code !== 0 && event.body.message){
               this.msgSvc.error(event.body.message);
