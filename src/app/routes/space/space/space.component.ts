@@ -28,12 +28,12 @@ export class SpaceComponent implements OnInit{
   ngOnInit(){
     this.userSvc.getSelf().subscribe(res=>{
       this.user=res.data;
+      this.fetchThought();
     });
-    this.fetchThought();
   }
 
   fetchThought(){
-    this.thoughtSvc.getAll().subscribe(res=>{
+    this.thoughtSvc.getByUid(this.user?.id!).subscribe(res=>{
       this.thoughts = res.data;
     });
   }

@@ -14,6 +14,10 @@ export class ThoughtService{
       return this.http.get<RO>('/api/thought');
     }
 
+    getByUid(uid:number){
+      return this.http.get<RO>(`/api/thought/getByUid/${uid}`);
+    }
+
     create(param:any){
       return this.http.post<RO>('/api/thought',param);
     }
