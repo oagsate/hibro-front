@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UiService } from './services/ui.service';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,12 @@ import { UiService } from './services/ui.service';
 })
 export class AppComponent {
   title = 'hibro-front';
-  loading = 0;
-  constructor(public uiSvc:UiService){
-    this.uiSvc.loading.subscribe(v=>{
-      this.loading = v;
-    });
+  constructor(
+    public uiSvc:UiService,
+    private userSvc:UserService
+  ){
+  }
+
+  ngOnInit(){
   }
 }

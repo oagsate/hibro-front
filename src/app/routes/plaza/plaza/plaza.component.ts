@@ -12,7 +12,7 @@ import { UserService } from "src/app/services/user.service";
 })
 export class PlazaComponent implements OnInit{
   list :any[] = [];
-  user?:User;
+  user:User = this.userSvc.user!;
 
   constructor(
     private userSvc:UserService,
@@ -22,8 +22,6 @@ export class PlazaComponent implements OnInit{
   ){}
 
   ngOnInit(){
-    this.userSvc.getSelf().subscribe(res=>{
-      this.user = res.data;
-    });
+
   }
 }

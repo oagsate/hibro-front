@@ -26,7 +26,6 @@ export class LoginComponent{
             password:this.password
         }).subscribe((res=>{
             if(res.code === 0){
-              this.storageSvc.setItem('user',res.data);
               this.router.navigateByUrl('plaza');
             }
         }));

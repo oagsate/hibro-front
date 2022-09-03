@@ -1,11 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { RO } from "../models/index.model";
+import { RO, User } from "../models/index.model";
 
 @Injectable({
     providedIn:'root'
 })
 export class UserService{
+    user?:User;
+
     constructor(
         private http:HttpClient
     ){}
@@ -28,5 +30,13 @@ export class UserService{
 
     getSelf(){
       return this.http.get<RO>('/api/self');
+    }
+
+    clear(){
+      this.user = undefined;
+    }
+
+    init(user:User){
+      this.user = user;
     }
 }
