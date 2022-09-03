@@ -1,0 +1,40 @@
+
+@import url(/src/variables.less);
+
+.item-wrapper{
+  display: flex;
+  padding: 8px;
+  border-bottom: 1px dashed @theme-1-1;
+  position: relative;
+
+  &:last-child{
+    margin-bottom: initial;
+    border-bottom: initial;
+  }
+  &:hover{
+    background-color: @theme-1-05;
+    .item-btns{
+      display: flex;
+    }
+  }
+}
+
+.item-content{
+  padding-right: 16px;
+}
+
+.item-time{
+  color:@gray;
+}
+
+.item-btns{
+  position:absolute;
+  right: 8px;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 30px;
+  align-items: center;
+  display: none;
+}

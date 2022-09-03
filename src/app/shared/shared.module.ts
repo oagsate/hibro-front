@@ -16,11 +16,14 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 
 import { LabelPipe } from "./pipes/label.pipe";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ListItemComponent } from "../component/list-item/list-item.component";
+import { CommonModule } from "@angular/common";
 
 
 @NgModule({
     imports:[
       FormsModule,
+      CommonModule,
       ReactiveFormsModule,
       NzMessageModule,
       NzInputModule,
@@ -38,10 +41,12 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
       NzModalModule
     ],
     declarations:[
-      LabelPipe
+      LabelPipe,
+      ListItemComponent,
     ],
     exports:[
       FormsModule,
+      CommonModule,
       ReactiveFormsModule,
         NzMessageModule,
         NzInputModule,
@@ -57,7 +62,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
         NzTabsModule,
         NzPopconfirmModule,
         NzModalModule,
-        LabelPipe
+        LabelPipe,
+        ListItemComponent
     ]
 })
 export class SharedModule{}

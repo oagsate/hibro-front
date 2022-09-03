@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { RO } from "../models/index.model";
+import { tap } from "rxjs";
+import { ListType, RO } from "../models/index.model";
 
 @Injectable({
     providedIn:'root'
@@ -15,7 +16,11 @@ export class ThoughtService{
     }
 
     getByUid(uid:number){
-      return this.http.get<RO>(`/api/thought/getByUid/${uid}`);
+      return this.http.get<RO>(`/api/thought/getByUid/${uid}`).pipe(tap(v=>{
+        v.data.forEach((item:any)=>{
+          item.type = ListType.Thought;
+        });
+      }));
     }
 
     create(param:any){

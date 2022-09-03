@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { zh_CN } from 'ng-zorro-antd/i18n';
@@ -22,10 +20,9 @@ registerLocaleData(zh);
     AppComponent,
     MainLayoutComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
-    BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,

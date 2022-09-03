@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { NzMessageService } from "ng-zorro-antd/message";
 import { NzModalService } from "ng-zorro-antd/modal";
 import { estatusOpts, genderOpts } from "src/app/datas/index.data";
-import { User } from "src/app/models/index.model";
+import { ListType, User } from "src/app/models/index.model";
 import { OptionService } from "src/app/services/option.service";
 import { ThoughtService } from "src/app/services/thought.service";
 import { UserService } from "src/app/services/user.service";
@@ -14,8 +14,7 @@ import { UserService } from "src/app/services/user.service";
 })
 export class SpaceComponent implements OnInit{
   user?:User;
-  thoughts:any = [];
-
+  list:any[]=[];
 
   constructor(
     private userSvc:UserService,
@@ -34,11 +33,11 @@ export class SpaceComponent implements OnInit{
 
   fetchThought(){
     this.thoughtSvc.getByUid(this.user?.id!).subscribe(res=>{
-      this.thoughts = res.data;
+      this.list = res.data;
     });
   }
 
-  onDeleteClick(id:number){
+  onDeleteClick({id,type}:{id:number,type:ListType}){
     this.modal.confirm({
       nzTitle: '确认删除',
       nzContent: '确定删除此项记录吗？',
