@@ -13,11 +13,14 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 import { LabelPipe } from "./pipes/label.pipe";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { ListItemComponent } from "../component/list-item/list-item.component";
+import { ListItemComponent } from "./components/list-item/list-item.component";
 import { CommonModule } from "@angular/common";
+import { ListPanelComponent } from "./components/list-panel/list-panel.component";
+import { RouterModule } from "@angular/router";
 
 
 @NgModule({
@@ -38,11 +41,14 @@ import { CommonModule } from "@angular/common";
       NzSpinModule,
       NzTabsModule,
       NzPopconfirmModule,
-      NzModalModule
+      NzModalModule,
+      NzSkeletonModule,
+      RouterModule
     ],
     declarations:[
       LabelPipe,
       ListItemComponent,
+      ListPanelComponent
     ],
     exports:[
       FormsModule,
@@ -62,8 +68,10 @@ import { CommonModule } from "@angular/common";
         NzTabsModule,
         NzPopconfirmModule,
         NzModalModule,
+        NzSkeletonModule,
         LabelPipe,
-        ListItemComponent
+        ListItemComponent,
+        ListPanelComponent
     ]
 })
 export class SharedModule{}

@@ -24,32 +24,6 @@ export class PlazaComponent implements OnInit{
   ngOnInit(){
     this.userSvc.getSelf().subscribe(res=>{
       this.user = res.data;
-      this.fetchThought();
-    });
-  }
-
-  fetchThought(){
-    this.thoughtSvc.getAll().subscribe(res=>{
-      if(res.code===0){
-        this.list = res.data;
-      }
-    });
-  }
-  onDeleteClick({id,type}:{id:number,type:ListType}){
-    this.modal.confirm({
-      nzTitle: '确认删除',
-      nzContent: '确定删除此项记录吗？',
-      nzOnOk: () => this.deleteThought(id),
-      nzOkDanger:true
-    });
-  }
-
-  deleteThought(id:number){
-    this.thoughtSvc.delete(id).subscribe(res=>{
-      if(res.code === 0){
-        this.msgSvc.success('操作成功');
-        this.fetchThought();
-      }
     });
   }
 }

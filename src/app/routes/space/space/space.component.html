@@ -46,16 +46,4 @@
     </div>
   </div>
 </div>
-<div class="sec sec2">
-  <nz-tabset [nzAnimated]="false" [nzTabBarExtraContent]="extraTemplate">
-    <nz-tab nzTitle="此刻">
-      <div class="tab-wrapper">
-        <app-list-item [list]="list" [uid]="user?.id" [selfId]="user?.id" (delete)="onDeleteClick($event)"></app-list-item>
-      </div>
-    </nz-tab>
-    <nz-tab nzTitle="文章">Content of Tab Pane 2</nz-tab>
-  </nz-tabset>
-  <ng-template #extraTemplate>
-    <a nz-button nzType="link" [routerLink]="['/thought']"><span nz-icon nzType="plus" nzTheme="outline"></span>发表此刻</a>
-  </ng-template>
-</div>
+<app-list-panel [uid]="user?.id" [selfId]="user?.id"></app-list-panel>
