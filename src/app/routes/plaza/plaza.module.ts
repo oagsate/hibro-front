@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PlazaRoutingModule } from './plaza-routing.module';
 import { PlazaComponent } from './plaza/plaza.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    PlazaRoutingModule
+    PlazaRoutingModule,
+    SharedModule
   ],
   declarations: [PlazaComponent]
 })

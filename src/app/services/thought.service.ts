@@ -12,7 +12,11 @@ export class ThoughtService{
     ){}
 
     getAll(){
-      return this.http.get<RO>('/api/thought');
+      return this.http.get<RO>('/api/thought').pipe(tap(v=>{
+        v.data.forEach((item:any)=>{
+          item.type = ListType.Thought;
+        });
+      }));
     }
 
     getByUid(uid:number){
