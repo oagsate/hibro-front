@@ -2,13 +2,19 @@
   <nz-tabset [nzAnimated]="false" [nzTabBarExtraContent]="extraTemplate">
     <nz-tab nzTitle="此刻">
       <div class="tab-wrapper">
-        <app-list-item [list]="list" [uid]="uid" [selfId]="selfId" (delete)="onDeleteClick($event)"></app-list-item>
-        <nz-skeleton *ngIf="loading && !list.length" [nzActive]="true"></nz-skeleton>
+        <app-list-item
+          [list]="list"
+          [uid]="uid"
+          [selfId]="selfId"
+          (delete)="onDeleteClick($event)"
+        ></app-list-item>
       </div>
     </nz-tab>
     <nz-tab nzTitle="文章">Content of Tab Pane 2</nz-tab>
   </nz-tabset>
   <ng-template #extraTemplate>
-    <a nz-button nzType="link" [routerLink]="['/thought']"><span nz-icon nzType="plus" nzTheme="outline"></span>发表此刻</a>
+    <a nz-button nzType="link" [routerLink]="['/thought']"
+      ><span nz-icon nzType="plus" nzTheme="outline"></span>发表此刻</a
+    >
   </ng-template>
 </div>

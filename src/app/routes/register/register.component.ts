@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { genderOpts } from 'src/app/datas/index.data';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -14,21 +16,22 @@ export class RegisterComponent {
     name: [null, [Validators.required]],
     password: [null, [Validators.required]],
     birthday: [null, [Validators.required]],
-    height: [null, [Validators.required]],
-    weight: [null, [Validators.required]],
+    gender: [null, [Validators.required]],
   });
   loading = false;
+  genderOpts = genderOpts;
 
   constructor(
     private fb: FormBuilder,
     private userSvc: UserService,
     private msgSvc: NzMessageService,
-    private router: Router
+    private router: Router,
+    private modal: NzModalService
   ) {}
 
   onSubmit() {
     if (this.form.valid) {
-      this.register();
+      this.showModal();
     } else {
       Object.values(this.form.controls).forEach((control) => {
         if (control.invalid) {
@@ -37,6 +40,14 @@ export class RegisterComponent {
         }
       });
     }
+  }
+
+  showModal() {
+    this.modal.confirm({
+      nzTitle: '确认提交',
+      nzContent: '注册后用户名、生日、性别将不能更改，确定提交吗？',
+      nzOnOk: () => this.register(),
+    });
   }
 
   register() {
