@@ -4,16 +4,16 @@
       <div class="logo">Hi! Bro.</div>
       <ul nz-menu nzTheme="dark" class="nav" nzMode="horizontal">
         <li nz-menu-item nzMatchRouter>
-          <a [routerLink]="['/','plaza']">广场</a>
+          <a [routerLink]="['/', 'plaza']">广场</a>
         </li>
         <li nz-menu-item nzMatchRouter>
-          <a [routerLink]="['/','space']">我的主页</a>
+          <a [routerLink]="['/', 'space']">我的主页</a>
         </li>
         <li nz-menu-item nzMatchRouter>
-          <a [routerLink]="['/','notice']">私信与通知</a>
+          <a [routerLink]="['/', 'notice']">私信与通知</a>
         </li>
       </ul>
-      <div class="user">欢迎，{{user.name}}</div>
+      <div class="user">欢迎，{{ user.name }}</div>
       <a nz-dropdown [nzDropdownMenu]="menu" class="setting">
         <i nz-icon nzType="setting" nzTheme="outline"></i>
       </a>

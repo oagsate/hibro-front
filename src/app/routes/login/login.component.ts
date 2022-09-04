@@ -13,7 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginComponent {
   username = '';
   password = '';
-
+  loading = false;
   constructor(
     private userSvc: UserService,
     private msgSvc: NzMessageService,
@@ -23,6 +23,11 @@ export class LoginComponent {
   ) {}
 
   onLogin() {
+    if (!this.username || !this.password) {
+      this.msgSvc.warning('请输入用户名和密码');
+      return;
+    }
+    this.loading = true;
     this.userSvc
       .login({
         name: this.username,
