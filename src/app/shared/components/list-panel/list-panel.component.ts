@@ -20,18 +20,24 @@ export class ListPanelComponent implements OnInit {
     }
   }
   @Input() selfId?: number;
-  @Input() set showAll(v: boolean) {
+  @Input() set showAll(v: boolean | undefined) {
     if (v) {
+      this._showAll = v;
       this.fetchAllThought();
     }
   }
 
   _uid?: number;
+  _showAll?: boolean;
   list: any[] = [];
   loading = false;
 
   get uid() {
     return this._uid;
+  }
+
+  get showAll() {
+    return this._showAll;
   }
 
   constructor(
@@ -72,7 +78,11 @@ export class ListPanelComponent implements OnInit {
   deleteThought(id: number) {
     this.thoughtSvc.delete(id).subscribe((res) => {
       this.msgSvc.success('操作成功');
-      this.fetchThought();
+      if (this.showAll) {
+        this.fetchAllThought();
+      } else {
+        this.fetchThought();
+      }
     });
   }
 }
