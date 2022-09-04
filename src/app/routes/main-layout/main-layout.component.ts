@@ -9,10 +9,12 @@ import { UserService } from "src/app/services/user.service";
   styleUrls:['./main-layout.component.less']
 })
 export class MainLayoutComponent{
+  user = this.userSvc.user!;
+
   constructor(
     private userSvc:UserService,
     private router:Router,
-    private storageSvc:StorageService
+    private storageSvc:StorageService,
   ){}
 
   logout(){

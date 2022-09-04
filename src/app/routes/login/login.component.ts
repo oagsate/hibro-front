@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { NzMessageService } from "ng-zorro-antd/message";
 import { StorageService } from "src/app/services/storage.service";
+import { UiService } from "src/app/services/ui.service";
 import { UserService } from "src/app/services/user.service";
 
 @Component({
@@ -17,7 +18,8 @@ export class LoginComponent{
         private userSvc:UserService,
         private msgSvc:NzMessageService,
         private router:Router,
-        private storageSvc:StorageService
+        private storageSvc:StorageService,
+        private uiSvc:UiService
     ){}
 
     onLogin(){
@@ -25,7 +27,8 @@ export class LoginComponent{
             name:this.username,
             password:this.password
         }).subscribe((res=>{
-            if(res.code === 0){
+          if(res.code === 0){
+              this.uiSvc.loginTimeoutWarned = false;
               this.router.navigateByUrl('plaza');
             }
         }));

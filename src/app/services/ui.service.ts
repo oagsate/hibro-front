@@ -7,6 +7,7 @@ import { Subject } from "rxjs";
 export class UiService{
   loadingCount = 0;
   loading = new Subject<number>();
+  loginTimeoutWarned = false;
 
   showLoading(){
     this.loading.next(++this.loadingCount);
