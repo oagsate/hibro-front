@@ -36,11 +36,9 @@ export class AppInterceptor implements HttpInterceptor {
           // this.uiSvc.hideLoading();
           if (event.status === HttpStatusCode.Ok) {
             if (event.body.code === 1) {
-              if (!this.uiSvc.loginTimeoutWarned) {
-                this.msgSvc.warning('尚未登录或登录已过期');
-                this.userSvc.clear();
-                this.router.navigateByUrl('login');
-              }
+              this.msgSvc.warning('尚未登录或登录已过期');
+              this.userSvc.clear();
+              this.router.navigateByUrl('login');
             } else if (event.body.code !== 0 && event.body.message) {
               this.msgSvc.error(event.body.message);
             }

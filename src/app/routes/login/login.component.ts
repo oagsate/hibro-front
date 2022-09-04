@@ -35,7 +35,6 @@ export class LoginComponent {
       })
       .subscribe((res) => {
         if (res.code === 0) {
-          this.uiSvc.loginTimeoutWarned = false;
           this.router.navigateByUrl('plaza');
         }
       });

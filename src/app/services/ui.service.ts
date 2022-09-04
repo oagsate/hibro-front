@@ -1,18 +1,17 @@
-import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn:'root'
+  providedIn: 'root',
 })
-export class UiService{
+export class UiService {
   loadingCount = 0;
   loading = new Subject<number>();
-  loginTimeoutWarned = false;
 
-  showLoading(){
+  showLoading() {
     this.loading.next(++this.loadingCount);
   }
-  hideLoading(){
+  hideLoading() {
     this.loading.next(--this.loadingCount);
   }
 }

@@ -6,40 +6,45 @@ import { MainLayoutComponent } from './routes/main-layout/main-layout.component'
 import { RegisterComponent } from './routes/register/register.component';
 
 const routes: Routes = [
-  { path: '', redirectTo:'plaza',pathMatch:'full'},
-  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: 'plaza', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   {
-    path:'register',component:RegisterComponent
+    path: 'register',
+    component: RegisterComponent,
   },
   {
-    path: 'plaza', component:MainLayoutComponent,
-    loadChildren:() => import('./routes/plaza/plaza.module').then(m => m.PlazaModule),
-    canActivate:[AuthGuard]
+    path: 'plaza',
+    component: MainLayoutComponent,
+    loadChildren: () =>
+      import('./routes/plaza/plaza.module').then((m) => m.PlazaModule),
+    canActivate: [AuthGuard],
   },
   {
-    path: 'notice', component:MainLayoutComponent,
-    loadChildren:() => import('./routes/notice/notice.module').then(m => m.NoticeModule),
-    canActivate:[AuthGuard]
+    path: 'notice',
+    component: MainLayoutComponent,
+    loadChildren: () =>
+      import('./routes/notice/notice.module').then((m) => m.NoticeModule),
+    canActivate: [AuthGuard],
   },
   {
-    path: 'space', component:MainLayoutComponent,
-    loadChildren:() => import('./routes/space/space.module').then(m => m.SpaceModule),
-    canActivate:[AuthGuard]
+    path: 'space',
+    component: MainLayoutComponent,
+    loadChildren: () =>
+      import('./routes/space/space.module').then((m) => m.SpaceModule),
+    canActivate: [AuthGuard],
   },
   {
-    path: 'thought', component:MainLayoutComponent,
-    loadChildren:() => import('./routes/thought/thought.module').then(m => m.ThoughtModule),
-    canActivate:[AuthGuard]
-  }
+    path: 'thought',
+    component: MainLayoutComponent,
+    loadChildren: () =>
+      import('./routes/thought/thought.module').then((m) => m.ThoughtModule),
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
   declarations: [],
-  imports: [
-    RouterModule.forRoot(routes,{useHash:true})
-  ],
-  exports:[
-    RouterModule
-  ]
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
