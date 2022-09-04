@@ -30,6 +30,10 @@ export class UserService {
     return this.http.get<User>('/api/self');
   }
 
+  update(param: User) {
+    return this.http.put<User>(`/api/users`, param);
+  }
+
   clear() {
     this.user = undefined;
   }

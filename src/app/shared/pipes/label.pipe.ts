@@ -1,9 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { SelectOpt } from 'src/app/models/index.model';
 
-@Pipe({name: 'label'})
+@Pipe({ name: 'label' })
 export class LabelPipe implements PipeTransform {
-  transform(value: number, arr:SelectOpt[] = []): string|undefined {
-    return arr.find(e=>e.value === value)?.label;
+  transform(
+    value: number | undefined,
+    arr: SelectOpt[] = []
+  ): string | undefined {
+    if (typeof value === 'number') {
+      return arr.find((e) => e.value === value)?.label;
+    } else {
+      return '-';
+    }
   }
 }

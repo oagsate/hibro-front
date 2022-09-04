@@ -40,6 +40,13 @@ const routes: Routes = [
       import('./routes/thought/thought.module').then((m) => m.ThoughtModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'profile',
+    component: MainLayoutComponent,
+    loadChildren: () =>
+      import('./routes/profile/profile.module').then((m) => m.ProfileModule),
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

@@ -19,13 +19,13 @@ export interface User {
   birthday: string;
   status: number;
   orientation: number;
-  height: number;
-  weight: number;
-  education: number;
-  location: number;
+  height?: number;
+  weight?: number;
+  education?: number;
+  location?: string;
   description?: any;
   email?: any;
-  estatus: number;
+  estatus?: number;
 }
 
 export interface Thought {

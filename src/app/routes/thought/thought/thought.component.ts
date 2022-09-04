@@ -27,6 +27,10 @@ export class ThoughtComponent implements OnInit {
   }
 
   onSubmit() {
+    if (!this.content) {
+      this.msgSvc.warning('想法不能为空');
+      return;
+    }
     this.thoughtSvc.create({ content: this.content }).subscribe((res) => {
       this.msgSvc.success('提交成功');
       this.router.navigateByUrl('/space');

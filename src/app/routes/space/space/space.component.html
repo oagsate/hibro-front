@@ -8,7 +8,7 @@
     <div class="info-head">
       <div class="name">{{ user.name }}</div>
       <div class="edit">
-        <a nz-button nzType="link"
+        <a nz-button nzType="link" [routerLink]="['/profile']"
           ><span nz-icon nzType="edit" nzTheme="outline"></span>编辑</a
         >
       </div>
@@ -37,7 +37,7 @@
       <div class="info-item">
         <div class="info-title">婚恋：</div>
         <div class="info-content">
-          {{ user.status | label: optSvc.estatusOpts }}
+          {{ user.estatus | label: optSvc.estatusOpts }}
         </div>
       </div>
       <div class="info-item">
@@ -48,15 +48,17 @@
       </div>
       <div class="info-item">
         <div class="info-title">身高：</div>
-        <div class="info-content">{{ user.height }} cm</div>
+        <div class="info-content">{{ user.height || "-" }} cm</div>
       </div>
       <div class="info-item">
         <div class="info-title">体重：</div>
-        <div class="info-content">{{ user.weight }} kg</div>
+        <div class="info-content">{{ user.weight || "-" }} kg</div>
       </div>
       <div class="info-item">
         <div class="info-title">所在地：</div>
-        <div class="info-content">{{ user.location }}</div>
+        <div class="info-content">
+          {{ user.location?.split("=")?.join(" ") }}
+        </div>
       </div>
       <div class="desc-item">
         <div class="desc-title">个人简介：</div>

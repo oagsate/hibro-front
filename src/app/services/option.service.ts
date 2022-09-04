@@ -1,11 +1,17 @@
-import { Injectable } from "@angular/core";
-import { educationOpts, estatusOpts, genderOpts } from "../datas/index.data";
+import { Injectable } from '@angular/core';
+import {
+  educationOpts,
+  estatusOpts,
+  genderOpts,
+  locationOpts,
+} from '../datas/index.data';
 
 @Injectable({
-  providedIn:'root'
+  providedIn: 'root',
 })
-export class OptionService{
+export class OptionService {
   genderOpts = genderOpts;
   estatusOpts = estatusOpts;
   educationOpts = educationOpts;
+  locationOpts = locationOpts;
 }
