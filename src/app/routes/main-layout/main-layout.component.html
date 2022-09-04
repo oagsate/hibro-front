@@ -34,3 +34,11 @@
     </div>
   </nz-content>
 </nz-layout>
+<nz-spin
+  class="spinner"
+  [nzIndicator]="indicatorTemplate"
+  *ngIf="!!(uiSvc.loading | async)"
+></nz-spin>
+<ng-template #indicatorTemplate
+  ><span nz-icon nzType="loading" nzTheme="outline"></span
+></ng-template>

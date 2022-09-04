@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { UiService } from './services/ui.service';
 import { StorageService } from './services/storage.service';
 import { UserService } from './services/user.service';
+import { nextLoop } from './util';
 
 /** Pass untouched request through to the next request handler. */
 @Injectable()
@@ -30,10 +31,14 @@ export class AppInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    nextLoop().then(() => {
+      this.uiSvc.showLoading();
+    });
     return next.handle(req).pipe(
       tap((event) => {
+        console.log(event);
         if (event instanceof HttpResponse) {
-          // this.uiSvc.hideLoading();
+          this.uiSvc.hideLoading();
           if (event.status === HttpStatusCode.Ok) {
             if (event.body.code === 1) {
               this.msgSvc.warning('尚未登录或登录已过期');

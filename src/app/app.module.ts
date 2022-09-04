@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './routes/login/login.component';
 import { SharedModule } from './shared/shared.module';
 import { RegisterComponent } from './routes/register/register.component';
-import { AppInterceptor } from './response-interceptor';
+import { AppInterceptor } from './http-interceptor';
 import { MainLayoutComponent } from './routes/main-layout/main-layout.component';
 
 registerLocaleData(zh);
@@ -26,9 +26,12 @@ registerLocaleData(zh);
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: NZ_I18N, useValue: zh_CN },
+    { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
