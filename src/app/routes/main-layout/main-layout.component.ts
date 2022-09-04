@@ -21,10 +21,8 @@ export class MainLayoutComponent {
 
   logout() {
     this.userSvc.logout().subscribe((res) => {
-      if (res.code === 0) {
-        this.userSvc.clear();
-        this.router.navigateByUrl('login');
-      }
+      this.userSvc.clear();
+      this.router.navigateByUrl('login');
     });
   }
 }

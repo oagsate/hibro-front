@@ -35,7 +35,7 @@ export class AuthGuard implements CanActivate {
       } else {
         return new Promise<boolean>((resolve) => {
           this.userSvc.getSelf().subscribe((res) => {
-            this.userSvc.init(res.data);
+            this.userSvc.init(res);
             resolve(true);
           });
         });

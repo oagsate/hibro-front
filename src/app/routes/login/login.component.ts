@@ -34,9 +34,7 @@ export class LoginComponent {
         password: this.password,
       })
       .subscribe((res) => {
-        if (res.code === 0) {
-          this.router.navigateByUrl('plaza');
-        }
+        this.router.navigateByUrl('plaza');
       });
   }
 
