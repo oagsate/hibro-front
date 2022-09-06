@@ -16,6 +16,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzCascaderModule } from 'ng-zorro-antd/cascader';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 import { LabelPipe } from './pipes/label.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -46,6 +47,7 @@ import { RouterModule } from '@angular/router';
     NzSkeletonModule,
     NzSelectModule,
     NzCascaderModule,
+    NzUploadModule,
     RouterModule,
   ],
   declarations: [LabelPipe, ListItemComponent, ListPanelComponent],
@@ -70,6 +72,7 @@ import { RouterModule } from '@angular/router';
     NzSkeletonModule,
     NzSelectModule,
     NzCascaderModule,
+    NzUploadModule,
     LabelPipe,
     ListItemComponent,
     ListPanelComponent,
