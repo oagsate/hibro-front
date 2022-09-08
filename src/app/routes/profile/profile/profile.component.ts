@@ -6,6 +6,7 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer } from 'rxjs';
 import { estatusOpts, genderOpts } from 'src/app/datas/index.data';
 import { User } from 'src/app/models/index.model';
+import { ImageService } from 'src/app/services/image.service';
 import { OptionService } from 'src/app/services/option.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -33,7 +34,8 @@ export class ProfileComponent implements OnInit {
     private userSvc: UserService,
     public optSvc: OptionService,
     private msgSvc: NzMessageService,
-    private router: Router
+    private router: Router,
+    private imageSvc: ImageService
   ) {}
 
   ngOnInit() {
@@ -86,5 +88,9 @@ export class ProfileComponent implements OnInit {
     reader.readAsDataURL(img);
   }
 
-  onUpload() {}
+  onUpload() {
+    const formData = new FormData();
+    formData.append('image', this.file!);
+    this.imageSvc.upload(formData).subscribe((res) => {});
+  }
 }

@@ -26,6 +26,7 @@ export interface User {
   description?: any;
   email?: any;
   estatus?: number;
+  avatar?: string;
 }
 
 export interface Thought {
@@ -34,6 +35,7 @@ export interface Thought {
   name: string;
   id: number;
   content: string;
+  avatar?: string;
 }
 
 export enum ListType {

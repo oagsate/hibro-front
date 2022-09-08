@@ -1,9 +1,12 @@
 <div class="sec sec1">
-  <img
-    src="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png"
-    alt=""
-    class="photo"
-  />
+  <img *ngIf="user.avatar" [src]="avatarUrl" alt="" class="photo" />
+  <span
+    class="avatar-placeholder"
+    *ngIf="!user.avatar"
+    nz-icon
+    nzType="user"
+    nzTheme="outline"
+  ></span>
   <div class="info" *ngIf="user">
     <div class="info-head">
       <div class="name">{{ user.name }}</div>

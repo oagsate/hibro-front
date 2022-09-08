@@ -1,40 +1,39 @@
-
 @import url(/src/variables.less);
 
-.item-wrapper{
+.item-wrapper {
   display: flex;
   padding: 8px;
   border-bottom: 1px dashed @theme-1-1;
   position: relative;
 
-  &:last-child{
+  &:last-child {
     margin-bottom: initial;
     border-bottom: initial;
   }
-  &:hover{
+  &:hover {
     background-color: @theme-1-05;
-    .item-btns{
+    .item-btns {
       display: flex;
     }
   }
 }
 
-.item-content{
+.item-content {
   padding-right: 16px;
 }
 
-.item-time{
-  color:@gray;
+.item-time {
+  color: @gray;
 }
 
-.item-user{
+.item-user {
   color: @theme;
   font-weight: bold;
   cursor: pointer;
 }
 
-.item-btns{
-  position:absolute;
+.item-btns {
+  position: absolute;
   right: 8px;
   top: 0;
   bottom: 0;
@@ -43,4 +42,14 @@
   height: 30px;
   align-items: center;
   display: none;
+}
+
+.avatar-placeholder {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  background-color: @theme-1-05;
 }
