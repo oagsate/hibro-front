@@ -1,5 +1,9 @@
 <div class="sec sec2">
-  <nz-tabset [nzAnimated]="false" [nzTabBarExtraContent]="extraTemplate">
+  <nz-tabset
+    [nzAnimated]="false"
+    [(nzSelectedIndex)]="tabIdx"
+    [nzTabBarExtraContent]="extraTemplate"
+  >
     <nz-tab nzTitle="此刻">
       <div class="tab-wrapper">
         <app-list-item
@@ -13,8 +17,13 @@
     <nz-tab nzTitle="文章">Content of Tab Pane 2</nz-tab>
   </nz-tabset>
   <ng-template #extraTemplate>
-    <a nz-button nzType="link" [routerLink]="['/thought']"
-      ><span nz-icon nzType="plus" nzTheme="outline"></span>发表此刻</a
+    <a
+      nz-button
+      nzType="link"
+      [routerLink]="tabIdx === 0 ? ['/thought'] : ['/journal']"
+      ><span nz-icon nzType="plus" nzTheme="outline"></span>发表{{
+        tabIdx === 0 ? "此刻" : "文章"
+      }}</a
     >
   </ng-template>
 </div>

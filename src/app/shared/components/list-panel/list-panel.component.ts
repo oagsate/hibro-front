@@ -31,6 +31,7 @@ export class ListPanelComponent implements OnInit {
   _showAll?: boolean;
   list: any[] = [];
   loading = false;
+  tabIdx = 0;
 
   get uid() {
     return this._uid;

@@ -47,6 +47,13 @@ const routes: Routes = [
       import('./routes/profile/profile.module').then((m) => m.ProfileModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'journal',
+    component: MainLayoutComponent,
+    loadChildren: () =>
+      import('./routes/journal/journal.module').then((m) => m.JournalModule),
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
