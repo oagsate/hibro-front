@@ -18,6 +18,7 @@ export class JournalComponent implements OnInit {
     base_url: '/tinymce', // Root for resources
     suffix: '.min', // Suffix to use when loading resources
     height: 500,
+    language: 'zh_CN',
     // menubar: false,
     // plugins: [
     //   'advlist autolink lists link image charmap print preview anchor',
