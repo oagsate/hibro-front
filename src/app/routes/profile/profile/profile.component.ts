@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer } from 'rxjs';
-import { estatusOpts, genderOpts } from 'src/app/datas/index.data';
+import { estatusOpts, genderOpts, Messages } from 'src/app/datas/index.data';
 import { User } from 'src/app/models/index.model';
 import { ImageService } from 'src/app/services/image.service';
 import { OptionService } from 'src/app/services/option.service';
@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
   loading = false;
   avatarUrl?: string;
   file?: File;
+  user = this.userSvc.user!;
 
   form = new FormGroup({
     estatus: new FormControl(null),
@@ -29,6 +30,10 @@ export class ProfileComponent implements OnInit {
     location: new FormControl(null),
     description: new FormControl(null),
   });
+
+  get oldAvatarUrl() {
+    return `http://localhost/images/${this.user.id}/${this.user.avatar}`;
+  }
 
   constructor(
     private userSvc: UserService,
@@ -91,6 +96,10 @@ export class ProfileComponent implements OnInit {
   onUpload() {
     const formData = new FormData();
     formData.append('image', this.file!);
-    this.imageSvc.upload(formData).subscribe((res) => {});
+    this.imageSvc.upload(formData).subscribe((res) => {
+      this.msgSvc.success(Messages.OperationOk);
+      this.userSvc.user!.avatar = res;
+      this.avatarUrl = undefined;
+    });
   }
 }

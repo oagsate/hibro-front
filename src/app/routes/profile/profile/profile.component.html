@@ -107,12 +107,17 @@
       </div>
     </nz-tab>
     <nz-tab nzTitle="头像">
+      <div class="mb8" *ngIf="user.avatar">
+        <div class="mb8">当前头像：</div>
+        <img [src]="oldAvatarUrl" alt="" class="old-avatar" />
+      </div>
       <nz-upload
         class="avatar-uploader"
         nzName="avatar"
         nzListType="picture-card"
         [nzShowUploadList]="false"
         [nzBeforeUpload]="beforeUpload"
+        nzAccept="image/*"
       >
         <ng-container *ngIf="!avatarUrl">
           <span
@@ -120,7 +125,7 @@
             nz-icon
             [nzType]="loading ? 'loading' : 'plus'"
           ></span>
-          <div class="ant-upload-text">Upload</div>
+          <div class="ant-upload-text">选择图片</div>
         </ng-container>
         <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
       </nz-upload>

@@ -9,6 +9,6 @@ export class ImageService {
   constructor(private http: HttpClient) {}
 
   upload(param: any) {
-    return this.http.post(`/api/image`, param);
+    return this.http.post<string>(`/api/image`, param);
   }
 }

@@ -2366,3 +2366,7 @@ export const locationOpts = locationOptsRaw.map((v) => {
     }),
   };
 });
+
+export enum Messages {
+  OperationOk = '操作成功',
+}
