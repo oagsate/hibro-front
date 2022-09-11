@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ListType, User } from 'src/app/models/index.model';
 import { UserService } from 'src/app/services/user.service';
 
@@ -16,7 +17,7 @@ export class ListItemComponent implements OnInit {
 
   ListType = ListType;
 
-  constructor(private userSvc: UserService) {}
+  constructor(private userSvc: UserService, private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {}
 
@@ -26,5 +27,9 @@ export class ListItemComponent implements OnInit {
 
   getAvatarUrl(item: any) {
     return `http://localhost/images/${item.uid}/${item.avatar}`;
+  }
+
+  sanitize(content: string) {
+    return this.sanitizer.bypassSecurityTrustHtml(content);
   }
 }

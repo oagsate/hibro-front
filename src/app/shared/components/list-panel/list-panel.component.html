@@ -16,18 +16,25 @@
     </nz-tab>
     <nz-tab nzTitle="文章">
       <div class="tab-wrapper">
-        <app-list-item [list]="journalList"></app-list-item>
+        <app-list-item
+          [list]="journalList"
+          [uid]="uid"
+          [selfId]="selfId"
+          (delete)="onDeleteClick($event)"
+        ></app-list-item>
       </div>
     </nz-tab>
   </nz-tabset>
   <ng-template #extraTemplate>
-    <a
-      nz-button
-      nzType="link"
-      [routerLink]="tabIdx === 0 ? ['/thought'] : ['/journal']"
-      ><span nz-icon nzType="plus" nzTheme="outline"></span>发表{{
-        tabIdx === 0 ? "此刻" : "文章"
-      }}</a
-    >
+    <a nz-dropdown [nzDropdownMenu]="publishMenu">
+      <span nz-icon nzType="plus"></span>
+      发表
+    </a>
+    <nz-dropdown-menu #publishMenu="nzDropdownMenu">
+      <ul nz-menu>
+        <li nz-menu-item [routerLink]="['/thought']">此刻</li>
+        <li nz-menu-item [routerLink]="['/journal']">文章</li>
+      </ul>
+    </nz-dropdown-menu>
   </ng-template>
 </div>
