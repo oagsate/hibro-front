@@ -1,73 +1,79 @@
-<div class="sec sec1">
-  <img *ngIf="user.avatar" [src]="avatarUrl" alt="" class="photo" />
-  <span
-    class="avatar-placeholder"
-    *ngIf="!user.avatar"
-    nz-icon
-    nzType="user"
-    nzTheme="outline"
-  ></span>
-  <div class="info" *ngIf="user">
-    <div class="info-head">
-      <div class="name">{{ user.name }}</div>
-      <div class="edit">
-        <a nz-button nzType="link" [routerLink]="['/profile']"
-          ><span nz-icon nzType="edit" nzTheme="outline"></span>编辑</a
-        >
-      </div>
-    </div>
-    <div class="user-info">
-      <div class="info-item">
-        <div class="info-title">上次登录：</div>
-        <div class="info-content">{{ user.lastTime | date: "yyyy-MM-dd" }}</div>
-      </div>
-      <div class="info-item">
-        <div class="info-title">注册时间：</div>
-        <div class="info-content">
-          {{ user.createTime | date: "yyyy-MM-dd" }}
+<ng-container *ngIf="user">
+  <div class="sec sec1">
+    <img *ngIf="user.avatar" [src]="avatarUrl" alt="" class="photo" />
+    <span
+      class="avatar-placeholder"
+      *ngIf="!user.avatar"
+      nz-icon
+      nzType="user"
+      nzTheme="outline"
+    ></span>
+    <div class="info" *ngIf="user">
+      <div class="info-head">
+        <div class="name">{{ user.name }}</div>
+        <div class="edit">
+          <a nz-button nzType="link" [routerLink]="['/profile']"
+            ><span nz-icon nzType="edit" nzTheme="outline"></span>编辑</a
+          >
         </div>
       </div>
-      <div class="info-item">
-        <div class="info-title">性别：</div>
-        <div class="info-content">
-          {{ user.gender | label: optSvc.genderOpts }}
+      <div class="user-info">
+        <div class="info-item">
+          <div class="info-title">上次登录：</div>
+          <div class="info-content">
+            {{ user.lastTime | date: "yyyy-MM-dd" }}
+          </div>
         </div>
-      </div>
-      <div class="info-item">
-        <div class="info-title">生日：</div>
-        <div class="info-content">{{ user.birthday | date: "yyyy-MM-dd" }}</div>
-      </div>
-      <div class="info-item">
-        <div class="info-title">婚恋：</div>
-        <div class="info-content">
-          {{ user.estatus | label: optSvc.estatusOpts }}
+        <div class="info-item">
+          <div class="info-title">注册时间：</div>
+          <div class="info-content">
+            {{ user.createTime | date: "yyyy-MM-dd" }}
+          </div>
         </div>
-      </div>
-      <div class="info-item">
-        <div class="info-title">教育程度：</div>
-        <div class="info-content">
-          {{ user.education | label: optSvc.educationOpts }}
+        <div class="info-item">
+          <div class="info-title">性别：</div>
+          <div class="info-content">
+            {{ user.gender | label: optSvc.genderOpts }}
+          </div>
         </div>
-      </div>
-      <div class="info-item">
-        <div class="info-title">身高：</div>
-        <div class="info-content">{{ user.height || "-" }} cm</div>
-      </div>
-      <div class="info-item">
-        <div class="info-title">体重：</div>
-        <div class="info-content">{{ user.weight || "-" }} kg</div>
-      </div>
-      <div class="info-item">
-        <div class="info-title">所在地：</div>
-        <div class="info-content">
-          {{ user.location?.split("=")?.join(" ") }}
+        <div class="info-item">
+          <div class="info-title">生日：</div>
+          <div class="info-content">
+            {{ user.birthday | date: "yyyy-MM-dd" }}
+          </div>
         </div>
-      </div>
-      <div class="desc-item">
-        <div class="desc-title">个人简介：</div>
-        <div class="desc-content">{{ user.description ?? "-" }}</div>
+        <div class="info-item">
+          <div class="info-title">婚恋：</div>
+          <div class="info-content">
+            {{ user.estatus | label: optSvc.estatusOpts }}
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-title">教育程度：</div>
+          <div class="info-content">
+            {{ user.education | label: optSvc.educationOpts }}
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-title">身高：</div>
+          <div class="info-content">{{ user.height || "-" }} cm</div>
+        </div>
+        <div class="info-item">
+          <div class="info-title">体重：</div>
+          <div class="info-content">{{ user.weight || "-" }} kg</div>
+        </div>
+        <div class="info-item">
+          <div class="info-title">所在地：</div>
+          <div class="info-content">
+            {{ user.location?.split("=")?.join(" ") }}
+          </div>
+        </div>
+        <div class="desc-item">
+          <div class="desc-title">个人简介：</div>
+          <div class="desc-content">{{ user.description ?? "-" }}</div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<app-list-panel [uid]="user.id" [selfId]="user.id"></app-list-panel>
+  <app-list-panel [uid]="user.id" [selfId]="user.id"></app-list-panel>
+</ng-container>

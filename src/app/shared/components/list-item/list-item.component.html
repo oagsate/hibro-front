@@ -14,7 +14,7 @@
       nzTheme="outline"
     ></span>
     <div>
-      <span class="item-user">{{ item.name }}：</span>
+      <span class="item-user" (click)="jump(item.uid)">{{ item.name }}：</span>
       <span class="item-content">{{ item.content }}</span>
       <span class="item-time">{{
         item.createTime | date: "yyyy-MM-dd HH:mm:ss"
@@ -48,7 +48,7 @@
       nzTheme="outline"
     ></span>
     <div>
-      <div class="item-user">{{ item.name }}：</div>
+      <div class="item-user" (click)="jump(item.uid)">{{ item.name }}：</div>
       <div class="item-content" [innerHTML]="sanitize(item.content)"></div>
       <div class="item-time">
         {{ item.createTime | date: "yyyy-MM-dd HH:mm:ss" }}

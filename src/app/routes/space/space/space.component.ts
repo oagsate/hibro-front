@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { estatusOpts, genderOpts } from 'src/app/datas/index.data';
@@ -13,10 +14,14 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./space.component.less'],
 })
 export class SpaceComponent implements OnInit {
-  user: User = this.userSvc.user!;
+  uid = this.route.snapshot.queryParams['uid'];
+  user?: User;
 
   get avatarUrl() {
-    return `http://localhost/images/${this.user.id}/${this.user.avatar}`;
+    if (this.user) {
+      return `http://localhost/images/${this.user.id}/${this.user.avatar}`;
+    }
+    return '';
   }
 
   constructor(
@@ -24,8 +29,17 @@ export class SpaceComponent implements OnInit {
     public optSvc: OptionService,
     private thoughtSvc: ThoughtService,
     private msgSvc: NzMessageService,
-    private modal: NzModalService
+    private modal: NzModalService,
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.uid) {
+      this.userSvc.getByUid(this.uid).subscribe((res) => {
+        this.user = res;
+      });
+    } else {
+      this.user = this.userSvc.user;
+    }
+  }
 }

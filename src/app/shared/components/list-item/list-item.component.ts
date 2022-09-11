@@ -32,4 +32,8 @@ export class ListItemComponent implements OnInit {
   sanitize(content: string) {
     return this.sanitizer.bypassSecurityTrustHtml(content);
   }
+
+  jump(uid: number) {
+    window.open(`/#/space?uid=${uid}`, '_blank');
+  }
 }
