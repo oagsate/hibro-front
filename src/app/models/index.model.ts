@@ -38,8 +38,19 @@ export interface Thought {
   avatar?: string;
 }
 
+export interface Journal {
+  uid: number;
+  createTime: string;
+  name: string;
+  id: number;
+  content: string;
+  avatar?: string;
+  updateTime: string;
+}
+
 export enum ListType {
   Thought,
+  Journal,
 }
 
 export enum APICode {

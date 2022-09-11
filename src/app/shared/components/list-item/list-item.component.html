@@ -33,4 +33,38 @@
       </button>
     </div>
   </ng-container>
+  <ng-container *ngIf="item.type === ListType.Journal">
+    <img
+      *ngIf="item.avatar"
+      class="avatar-s mr16"
+      [src]="getAvatarUrl(item)"
+      alt=""
+    />
+    <span
+      *ngIf="!item.avatar"
+      class="avatar-placeholder mr16"
+      nz-icon
+      nzType="user"
+      nzTheme="outline"
+    ></span>
+    <div>
+      <div class="item-user">{{ item.name }}：</div>
+      <div class="item-content" [innerHTML]="item.content"></div>
+      <div class="item-time">
+        {{ item.createTime | date: "yyyy-MM-dd HH:mm:ss" }}
+      </div>
+    </div>
+    <div class="item-btns">
+      <button
+        nz-button
+        nzDanger
+        nzType="default"
+        nzSize="small"
+        *ngIf="item.uid === selfId"
+        (click)="onDeleteClick(item.id, item.type)"
+      >
+        删除
+      </button>
+    </div>
+  </ng-container>
 </div>

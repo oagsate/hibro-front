@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { estatusOpts, genderOpts } from 'src/app/datas/index.data';
+import { estatusOpts, genderOpts, Messages } from 'src/app/datas/index.data';
 import { ListType, User } from 'src/app/models/index.model';
+import { JournalService } from 'src/app/services/journal.service';
 import { OptionService } from 'src/app/services/option.service';
 import { ThoughtService } from 'src/app/services/thought.service';
 import { UserService } from 'src/app/services/user.service';
@@ -17,6 +18,7 @@ export class ListPanelComponent implements OnInit {
     this._uid = v;
     if (v !== undefined && v !== null) {
       this.fetchThought();
+      this.fetchJournal();
     }
   }
   @Input() selfId?: number;
@@ -24,12 +26,14 @@ export class ListPanelComponent implements OnInit {
     if (v) {
       this._showAll = v;
       this.fetchAllThought();
+      this.fetchAllJournal();
     }
   }
 
   _uid?: number;
   _showAll?: boolean;
-  list: any[] = [];
+  thoughtList: any[] = [];
+  journalList: any[] = [];
   loading = false;
   tabIdx = 0;
 
@@ -46,7 +50,8 @@ export class ListPanelComponent implements OnInit {
     public optSvc: OptionService,
     private thoughtSvc: ThoughtService,
     private msgSvc: NzMessageService,
-    private modal: NzModalService
+    private modal: NzModalService,
+    private journalSvc: JournalService
   ) {}
 
   ngOnInit() {}
@@ -55,7 +60,7 @@ export class ListPanelComponent implements OnInit {
     this.loading = true;
     this.thoughtSvc.getByUid(this.uid!).subscribe((res) => {
       this.loading = false;
-      this.list = res;
+      this.thoughtList = res;
     });
   }
 
@@ -63,7 +68,23 @@ export class ListPanelComponent implements OnInit {
     this.loading = true;
     this.thoughtSvc.getAll().subscribe((res) => {
       this.loading = false;
-      this.list = res;
+      this.thoughtList = res;
+    });
+  }
+
+  fetchJournal() {
+    this.loading = true;
+    this.journalSvc.getByUid(this.uid!).subscribe((res) => {
+      this.loading = false;
+      this.journalList = res;
+    });
+  }
+
+  fetchAllJournal() {
+    this.loading = true;
+    this.journalSvc.getAll().subscribe((res) => {
+      this.loading = false;
+      this.journalList = res;
     });
   }
 
@@ -71,19 +92,30 @@ export class ListPanelComponent implements OnInit {
     this.modal.confirm({
       nzTitle: '确认删除',
       nzContent: '确定删除此项记录吗？',
-      nzOnOk: () => this.deleteThought(id),
+      nzOnOk: () => this.deleteThought(id, type),
       nzOkDanger: true,
     });
   }
 
-  deleteThought(id: number) {
-    this.thoughtSvc.delete(id).subscribe((res) => {
-      this.msgSvc.success('操作成功');
-      if (this.showAll) {
-        this.fetchAllThought();
-      } else {
-        this.fetchThought();
-      }
-    });
+  deleteThought(id: number, type: ListType) {
+    if (type === ListType.Thought) {
+      this.thoughtSvc.delete(id).subscribe((res) => {
+        this.msgSvc.success('操作成功');
+        if (this.showAll) {
+          this.fetchAllThought();
+        } else {
+          this.fetchThought();
+        }
+      });
+    } else if (type === ListType.Journal) {
+      this.journalSvc.delete(id).subscribe(() => {
+        this.msgSvc.success(Messages.OperationOk);
+        if (this.showAll) {
+          this.fetchAllJournal();
+        } else {
+          this.fetchJournal();
+        }
+      });
+    }
   }
 }

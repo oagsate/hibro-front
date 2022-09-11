@@ -7,14 +7,18 @@
     <nz-tab nzTitle="此刻">
       <div class="tab-wrapper">
         <app-list-item
-          [list]="list"
+          [list]="thoughtList"
           [uid]="uid"
           [selfId]="selfId"
           (delete)="onDeleteClick($event)"
         ></app-list-item>
       </div>
     </nz-tab>
-    <nz-tab nzTitle="文章">Content of Tab Pane 2</nz-tab>
+    <nz-tab nzTitle="文章">
+      <div class="tab-wrapper">
+        <app-list-item [list]="journalList"></app-list-item>
+      </div>
+    </nz-tab>
   </nz-tabset>
   <ng-template #extraTemplate>
     <a

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { estatusOpts, genderOpts } from 'src/app/datas/index.data';
+import { estatusOpts, genderOpts, Messages } from 'src/app/datas/index.data';
 import { User } from 'src/app/models/index.model';
+import { JournalService } from 'src/app/services/journal.service';
 import { OptionService } from 'src/app/services/option.service';
 import { UserService } from 'src/app/services/user.service';
+import tinymce from 'tinymce';
 
 @Component({
   selector: 'app-journal',
@@ -12,8 +14,6 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./journal.component.less'],
 })
 export class JournalComponent implements OnInit {
-  content = '';
-
   editorInitValue = {
     base_url: '/tinymce', // Root for resources
     suffix: '.min', // Suffix to use when loading resources
@@ -84,12 +84,23 @@ export class JournalComponent implements OnInit {
     private userSvc: UserService,
     public optSvc: OptionService,
     private msgSvc: NzMessageService,
-    private router: Router
+    private router: Router,
+    private journalSvc: JournalService
   ) {}
 
   ngOnInit() {
     return;
   }
 
-  onSubmit() {}
+  onSubmit() {
+    const content = tinymce.activeEditor?.getContent();
+    this.journalSvc
+      .create({
+        content,
+      })
+      .subscribe(() => {
+        this.msgSvc.success(Messages.OperationOk);
+        this.router.navigateByUrl('/space');
+      });
+  }
 }
