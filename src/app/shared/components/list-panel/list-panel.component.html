@@ -26,7 +26,11 @@
     </nz-tab>
   </nz-tabset>
   <ng-template #extraTemplate>
-    <a nz-dropdown [nzDropdownMenu]="publishMenu">
+    <a
+      nz-dropdown
+      [nzDropdownMenu]="publishMenu"
+      *ngIf="selfId === uid || showAll"
+    >
       <span nz-icon nzType="plus"></span>
       发表
     </a>

@@ -11,7 +11,7 @@
     <div class="info" *ngIf="user">
       <div class="info-head">
         <div class="name">{{ user.name }}</div>
-        <div class="edit">
+        <div class="edit" *ngIf="self.id === user.id">
           <a nz-button nzType="link" [routerLink]="['/profile']"
             ><span nz-icon nzType="edit" nzTheme="outline"></span>编辑</a
           >
@@ -75,5 +75,5 @@
       </div>
     </div>
   </div>
-  <app-list-panel [uid]="user.id" [selfId]="user.id"></app-list-panel>
+  <app-list-panel [uid]="user.id" [selfId]="self.id"></app-list-panel>
 </ng-container>
