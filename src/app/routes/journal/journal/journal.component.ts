@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { estatusOpts, genderOpts, Messages } from 'src/app/datas/index.data';
-import { User } from 'src/app/models/index.model';
+import { Journal, User } from 'src/app/models/index.model';
 import { JournalService } from 'src/app/services/journal.service';
 import { OptionService } from 'src/app/services/option.service';
 import { UserService } from 'src/app/services/user.service';
@@ -82,7 +82,7 @@ export class JournalComponent implements OnInit {
   };
 
   journalId?: number;
-  content = '';
+  journal?: Journal;
 
   constructor(
     private userSvc: UserService,
@@ -105,7 +105,7 @@ export class JournalComponent implements OnInit {
   prepareData(id?: number) {
     if (id) {
       this.journalSvc.getById(id).subscribe((res) => {
-        this.content = res.content;
+        this.journal = res;
       });
     }
   }

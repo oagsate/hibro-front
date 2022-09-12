@@ -5,7 +5,13 @@
       <button nz-button nzType="primary" (click)="onSubmit()">提交</button>
     </div>
   </ng-container>
-  <ng-container *ngIf="journalId">
-    <div [innerHTML]="sanitize(content)"></div>
+  <ng-container *ngIf="journal">
+    <div class="name">
+      作者：<span>{{ journal.name }}</span>
+    </div>
+    <div [innerHTML]="sanitize(journal.content)"></div>
+    <div class="time">
+      发布时间：{{ journal.createTime | date: "yyyy-MM-dd HH:mm:ss" }}
+    </div>
   </ng-container>
 </div>
