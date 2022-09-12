@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { estatusOpts, genderOpts, Messages } from 'src/app/datas/index.data';
 import { User } from 'src/app/models/index.model';
@@ -80,27 +81,51 @@ export class JournalComponent implements OnInit {
     language: 'zh_CN',
   };
 
+  journalId?: number;
+  content = '';
+
   constructor(
     private userSvc: UserService,
     public optSvc: OptionService,
     private msgSvc: NzMessageService,
     private router: Router,
-    private journalSvc: JournalService
-  ) {}
+    private journalSvc: JournalService,
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer
+  ) {
+    this.route.queryParamMap.subscribe((v) => {
+      this.journalId = parseInt(v.get('id') ?? '');
+      this.prepareData(this.journalId);
+    });
+  }
 
   ngOnInit() {
     return;
   }
+  prepareData(id?: number) {
+    if (id) {
+      this.journalSvc.getById(id).subscribe((res) => {
+        this.content = res.content;
+      });
+    }
+  }
 
   onSubmit() {
     const content = tinymce.activeEditor?.getContent();
+    const brief = tinymce.activeEditor
+      ?.getContent({ format: 'text' })
+      ?.slice(0, 100);
     this.journalSvc
       .create({
         content,
+        brief,
       })
       .subscribe(() => {
         this.msgSvc.success(Messages.OperationOk);
         this.router.navigateByUrl('/space');
       });
+  }
+  sanitize(content: string) {
+    return this.sanitizer.bypassSecurityTrustHtml(content);
   }
 }

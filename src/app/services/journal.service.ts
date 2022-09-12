@@ -29,6 +29,10 @@ export class JournalService {
     );
   }
 
+  getById(id: number) {
+    return this.http.get<Journal>(`/api/journal/${id}`);
+  }
+
   create(param: any) {
     return this.http.post<any>('/api/journal', param);
   }

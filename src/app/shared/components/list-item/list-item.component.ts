@@ -36,4 +36,8 @@ export class ListItemComponent implements OnInit {
   jump(uid: number) {
     window.open(`/#/space?uid=${uid}`, '_blank');
   }
+
+  onReadClick(id: number) {
+    window.open(`/#/journal?id=${id}`, '_blank');
+  }
 }

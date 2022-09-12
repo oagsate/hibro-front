@@ -1,6 +1,11 @@
 <div class="wrapper">
-  <editor [init]="editorInitValue"></editor>
-  <div class="btn">
-    <button nz-button nzType="primary" (click)="onSubmit()">提交</button>
-  </div>
+  <ng-container *ngIf="!journalId">
+    <editor [init]="editorInitValue"></editor>
+    <div class="btn">
+      <button nz-button nzType="primary" (click)="onSubmit()">提交</button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="journalId">
+    <div [innerHTML]="sanitize(content)"></div>
+  </ng-container>
 </div>
