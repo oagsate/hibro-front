@@ -1,13 +1,22 @@
 <div class="wrapper">
-  <ng-container *ngIf="!journalId">
-    <editor [init]="editorInitValue"></editor>
+  <ng-container
+    *ngIf="mode === JournalPageMode.Edit || mode === JournalPageMode.Create"
+  >
+    <editor [init]="editorInitValue" (onInit)="onEditorInit()"></editor>
     <div class="btn">
       <button nz-button nzType="primary" (click)="onSubmit()">提交</button>
     </div>
   </ng-container>
-  <ng-container *ngIf="journal">
-    <div class="name">
-      作者：<span>{{ journal.name }}</span>
+  <ng-container *ngIf="mode === JournalPageMode.Read && journal">
+    <div class="top">
+      <div class="name">
+        作者：<span>{{ journal.name }}</span>
+      </div>
+      <div>
+        <a nz-button nzType="link" (click)="jumpToEdit()"
+          ><span nz-icon nzType="edit" nzTheme="outline"></span>编辑</a
+        >
+      </div>
     </div>
     <div [innerHTML]="sanitize(journal.content)"></div>
     <div class="time">

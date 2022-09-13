@@ -7,7 +7,9 @@ import { Journal, User } from 'src/app/models/index.model';
 import { JournalService } from 'src/app/services/journal.service';
 import { OptionService } from 'src/app/services/option.service';
 import { UserService } from 'src/app/services/user.service';
+import { nextLoop } from 'src/app/util';
 import tinymce from 'tinymce';
+import { JournalPageMode } from '../journal-routing.module';
 
 @Component({
   selector: 'app-journal',
@@ -81,8 +83,9 @@ export class JournalComponent implements OnInit {
     language: 'zh_CN',
   };
 
-  journalId?: number;
   journal?: Journal;
+  mode?: JournalPageMode;
+  JournalPageMode = JournalPageMode;
 
   constructor(
     private userSvc: UserService,
@@ -93,9 +96,10 @@ export class JournalComponent implements OnInit {
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer
   ) {
-    this.route.queryParamMap.subscribe((v) => {
-      this.journalId = parseInt(v.get('id') ?? '');
-      this.prepareData(this.journalId);
+    this.route.paramMap.subscribe((v) => {
+      this.mode = this.route.snapshot.data?.['mode'];
+      const journalId = parseInt(v.get('id') ?? '');
+      this.prepareData(journalId);
     });
   }
 
@@ -115,17 +119,35 @@ export class JournalComponent implements OnInit {
     const brief = tinymce.activeEditor
       ?.getContent({ format: 'text' })
       ?.slice(0, 100);
-    this.journalSvc
-      .create({
-        content,
-        brief,
-      })
-      .subscribe(() => {
-        this.msgSvc.success(Messages.OperationOk);
-        this.router.navigateByUrl('/space');
-      });
+    const apiCall =
+      this.mode === JournalPageMode.Create
+        ? this.journalSvc.create({
+            content,
+            brief,
+          })
+        : this.journalSvc.update({
+            id: this.journal?.id,
+            content,
+            brief,
+          });
+
+    apiCall.subscribe(() => {
+      this.msgSvc.success(Messages.OperationOk);
+      this.router.navigateByUrl('/space');
+    });
   }
   sanitize(content: string) {
     return this.sanitizer.bypassSecurityTrustHtml(content);
+  }
+
+  onEditorInit() {
+    const content = this.journal?.content;
+    if (content) {
+      tinymce.activeEditor?.setContent(content);
+    }
+  }
+
+  jumpToEdit() {
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 }

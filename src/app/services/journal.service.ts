@@ -37,6 +37,10 @@ export class JournalService {
     return this.http.post<any>('/api/journal', param);
   }
 
+  update(param: any) {
+    return this.http.put<any>('/api/journal', param);
+  }
+
   delete(id: number) {
     return this.http.delete<any>('/api/journal', { params: { id } });
   }

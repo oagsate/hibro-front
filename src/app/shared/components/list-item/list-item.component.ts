@@ -38,6 +38,6 @@ export class ListItemComponent implements OnInit {
   }
 
   onReadClick(id: number) {
-    window.open(`/#/journal?id=${id}`, '_blank');
+    window.open(`/#/journal/${id}`, '_blank');
   }
 }
