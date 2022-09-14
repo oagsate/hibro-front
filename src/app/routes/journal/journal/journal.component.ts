@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -86,6 +87,7 @@ export class JournalComponent implements OnInit {
   journal?: Journal;
   mode?: JournalPageMode;
   JournalPageMode = JournalPageMode;
+  self: User = this.userSvc.user!;
 
   constructor(
     private userSvc: UserService,
@@ -109,7 +111,12 @@ export class JournalComponent implements OnInit {
   prepareData(id?: number) {
     if (id) {
       this.journalSvc.getById(id).subscribe((res) => {
-        this.journal = res;
+        if (this.mode === JournalPageMode.Edit && !this.canEdit()) {
+          this.msgSvc.warning(Messages.Unauthorized);
+          this.router.navigate(['..'], { relativeTo: this.route });
+        } else {
+          this.journal = res;
+        }
       });
     }
   }
@@ -149,5 +156,9 @@ export class JournalComponent implements OnInit {
 
   jumpToEdit() {
     this.router.navigate(['edit'], { relativeTo: this.route });
+  }
+
+  canEdit() {
+    return this.self.id === this.journal?.uid;
   }
 }

@@ -2369,4 +2369,5 @@ export const locationOpts = locationOptsRaw.map((v) => {
 
 export enum Messages {
   OperationOk = '操作成功',
+  Unauthorized = '您没有权限进行此操作',
 }
