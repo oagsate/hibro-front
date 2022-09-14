@@ -60,7 +60,9 @@ export class AppInterceptor implements HttpInterceptor {
 
   handleErrCode(code: APICode) {
     if (code === APICode.NotLogin) {
-      this.msgSvc.warning('尚未登录或登录已过期');
+      if (this.userSvc.user) {
+        this.msgSvc.warning('尚未登录或登录已过期');
+      }
       this.userSvc.clear();
       this.router.navigateByUrl('login');
     } else if (code === APICode.UserExist) {
