@@ -4,20 +4,20 @@
     [(nzSelectedIndex)]="tabIdx"
     [nzTabBarExtraContent]="extraTemplate"
   >
-    <nz-tab nzTitle="此刻">
+    <nz-tab nzTitle="文章">
       <div class="tab-wrapper">
         <app-list-item
-          [list]="thoughtList"
+          [list]="journalList"
           [uid]="uid"
           [selfId]="selfId"
           (delete)="onDeleteClick($event)"
         ></app-list-item>
       </div>
     </nz-tab>
-    <nz-tab nzTitle="文章">
+    <nz-tab nzTitle="此刻">
       <div class="tab-wrapper">
         <app-list-item
-          [list]="journalList"
+          [list]="thoughtList"
           [uid]="uid"
           [selfId]="selfId"
           (delete)="onDeleteClick($event)"
@@ -36,8 +36,8 @@
     </a>
     <nz-dropdown-menu #publishMenu="nzDropdownMenu">
       <ul nz-menu>
-        <li nz-menu-item [routerLink]="['/thought']">此刻</li>
         <li nz-menu-item [routerLink]="['/journal']">文章</li>
+        <li nz-menu-item [routerLink]="['/thought']">此刻</li>
       </ul>
     </nz-dropdown-menu>
   </ng-template>
