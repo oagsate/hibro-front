@@ -111,7 +111,7 @@ export class JournalComponent implements OnInit {
   prepareData(id?: number) {
     if (id) {
       this.journalSvc.getById(id).subscribe((res) => {
-        if (this.mode === JournalPageMode.Edit && !this.canEdit()) {
+        if (this.mode === JournalPageMode.Edit && !this.canEdit(res)) {
           this.msgSvc.warning(Messages.Unauthorized);
           this.router.navigate(['..'], { relativeTo: this.route });
         } else {
@@ -158,7 +158,7 @@ export class JournalComponent implements OnInit {
     this.router.navigate(['edit'], { relativeTo: this.route });
   }
 
-  canEdit() {
-    return this.self.id === this.journal?.uid;
+  canEdit(j: Journal) {
+    return this.self.id === j.uid;
   }
 }
