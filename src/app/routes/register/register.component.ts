@@ -52,10 +52,15 @@ export class RegisterComponent {
 
   register() {
     this.loading = true;
-    this.userSvc.register(this.form.value).subscribe((res) => {
-      this.msgSvc.success('注册成功');
-      this.router.navigateByUrl('plaza');
-    });
+    this.userSvc.register(this.form.value).subscribe(
+      (res) => {
+        this.msgSvc.success('注册成功');
+        this.router.navigateByUrl('plaza');
+      },
+      () => {
+        this.loading = false;
+      }
+    );
   }
 
   onLoginClick() {
