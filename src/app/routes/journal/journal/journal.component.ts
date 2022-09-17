@@ -87,6 +87,7 @@ export class JournalComponent implements OnInit {
   journal?: Journal;
   mode?: JournalPageMode;
   JournalPageMode = JournalPageMode;
+  title = '';
   self: User = this.userSvc.user!;
 
   constructor(
@@ -116,6 +117,7 @@ export class JournalComponent implements OnInit {
           this.router.navigate(['..'], { relativeTo: this.route });
         } else {
           this.journal = res;
+          this.title = res.title ?? '';
         }
       });
     }
@@ -123,6 +125,11 @@ export class JournalComponent implements OnInit {
 
   onSubmit() {
     const content = tinymce.activeEditor?.getContent();
+    const title = this.title?.trim();
+    if (!title || !content) {
+      this.msgSvc.warning(Messages.Incomplete);
+      return;
+    }
     const brief = tinymce.activeEditor
       ?.getContent({ format: 'text' })
       ?.slice(0, 100);
@@ -131,11 +138,13 @@ export class JournalComponent implements OnInit {
         ? this.journalSvc.create({
             content,
             brief,
+            title,
           })
         : this.journalSvc.update({
             id: this.journal?.id,
             content,
             brief,
+            title,
           });
 
     apiCall.subscribe(() => {

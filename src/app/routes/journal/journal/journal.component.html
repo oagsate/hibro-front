@@ -2,6 +2,13 @@
   <ng-container
     *ngIf="mode === JournalPageMode.Edit || mode === JournalPageMode.Create"
   >
+    <input
+      nz-input
+      type="text"
+      placeholder="请输入文章标题"
+      [(ngModel)]="title"
+      class="mb8"
+    />
     <editor [init]="editorInitValue" (onInit)="onEditorInit()"></editor>
     <div class="btn">
       <button nz-button nzType="primary" (click)="onSubmit()">提交</button>
@@ -9,8 +16,9 @@
   </ng-container>
   <ng-container *ngIf="mode === JournalPageMode.Read && journal">
     <div class="top">
-      <div class="name">
-        作者：<span>{{ journal.name }}</span>
+      <div class="title">
+        <span class="pr16">标题：{{ journal.title }}</span>
+        <span>作者：{{ journal.name }}</span>
       </div>
       <div *ngIf="journal.uid === self.id">
         <a nz-button nzType="link" (click)="jumpToEdit()"

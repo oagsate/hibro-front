@@ -48,7 +48,9 @@
       nzTheme="outline"
     ></span>
     <div>
-      <div class="item-user" (click)="jump(item.uid)">{{ item.name }}：</div>
+      <div class="item-user">
+        <span (click)="jump(item.uid)">{{ item.name }}： </span>{{ item.title }}
+      </div>
       <div class="item-content" [innerHTML]="sanitize(item.brief)"></div>
       <div class="item-time">
         {{ item.createTime | date: "yyyy-MM-dd HH:mm:ss" }}

@@ -47,6 +47,7 @@ export interface Journal {
   avatar?: string;
   updateTime: string;
   brief: string;
+  title?: string;
 }
 
 export enum ListType {
