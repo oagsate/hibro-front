@@ -36,6 +36,7 @@ export class AppInterceptor implements HttpInterceptor {
     nextLoop().then(() => {
       this.uiSvc.showLoading();
     });
+    req = req.clone({ withCredentials: true });
     return next.handle(req).pipe(map((event) => this.process(event)));
   }
 

@@ -7,6 +7,7 @@ import { ListType, User } from 'src/app/models/index.model';
 import { OptionService } from 'src/app/services/option.service';
 import { ThoughtService } from 'src/app/services/thought.service';
 import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-space',
@@ -19,7 +20,7 @@ export class SpaceComponent implements OnInit {
 
   get avatarUrl() {
     if (this.user) {
-      return `http://localhost/images/${this.user.id}/${this.user.avatar}`;
+      return `${environment.url}images/${this.user.id}/${this.user.avatar}`;
     }
     return '';
   }

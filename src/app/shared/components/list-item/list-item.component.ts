@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ListType, User } from 'src/app/models/index.model';
 import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-list-item',
@@ -26,7 +27,7 @@ export class ListItemComponent implements OnInit {
   }
 
   getAvatarUrl(item: any) {
-    return `http://localhost/images/${item.uid}/${item.avatar}`;
+    return `${environment.url}images/${item.uid}/${item.avatar}`;
   }
 
   sanitize(content: string) {

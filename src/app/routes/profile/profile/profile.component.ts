@@ -9,6 +9,7 @@ import { User } from 'src/app/models/index.model';
 import { ImageService } from 'src/app/services/image.service';
 import { OptionService } from 'src/app/services/option.service';
 import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -32,7 +33,7 @@ export class ProfileComponent implements OnInit {
   });
 
   get oldAvatarUrl() {
-    return `http://localhost/images/${this.user.id}/${this.user.avatar}`;
+    return `${environment.url}images/${this.user.id}/${this.user.avatar}`;
   }
 
   constructor(
